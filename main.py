@@ -5,7 +5,7 @@ from os.path import isfile, join
 from collections import Counter
 
 #Variables
-keyWords = ["if","while","for","do while"]
+keyWords = ["if","while","for","switch"]
 fileContent = 0
 auxFile = 0
 path = 0
