@@ -13,20 +13,19 @@ files = []
 
 #Funciones
 #DIP (list,int,string)
-#file es una lista resultado de hacer split al contenido del archivo
+#file es un archivo (el archivo raíz)
 #depth es un contador de la altura del árbol
-#fileExt es la extensión del archivo para abrir el siguiente
-def DIP(file,depth,fileExt): 
-	#¿El arreglo contiene la palabra extends?
-	if 'extends' in file: #Si
-		depth = depth + 1 #Aumentamos el contador 
-		#Obtenemos el nombre del siguiente archivo
-		#join(path,file.find('extends')+1,fileExt)
-		auxFile = open(join(path,file[file.index('extends')+1],fileExt),"r").read()
-		#auxFile es el contenido del siguiente archivo
-		return DIP(auxFile.split(),depth,fileExt)
-	else:
-		return depth
+#files es una lista de todos los archivos
+def DIP(file,depth,files): 
+	#Vamos a comparar con todos los demás archivos para ver si alguno extiende de file
+	for f in files:
+		auxFile = open(join(path,f),"r").read() #Contenido del archivo f
+		if ('extends '+file) in auxFile: #Si el auxFile extiende de file (archivo raíz)
+			depth = depth + 1
+			return DIP(f,depth,files)
+		else:
+			return depth
+
 
 #WMC(string)
 #file es un String con todo el contenido del archivo
@@ -46,8 +45,8 @@ for file in files:
 	except Exception:
 		print("Error")
 		continue
-	#print("In file "+file+" WMC="+str(WMC(fileContent)))
 	try:
-		print("In file "+file+" DIP="+str(DIP(fileContent.split(),0,file[file.find('.'):])))
+		#print("In file "+file+" WMC="+str(WMC(fileContent)))
+		print("In file "+file+" DIP="+str(DIP(file,0,files)))
 	except FileNotFoundError:
 		print("El archivo "+file+" extiende de una clase ubicada en una libreria")
