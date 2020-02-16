@@ -20,7 +20,7 @@ def DIP(file,depth,files):
 	#Vamos a comparar con todos los demás archivos para ver si alguno extiende de file
 	for f in files:
 		auxFile = open(join(path,f),"r").read() #Contenido del archivo f
-		if ('extends '+file) in auxFile: #Si el auxFile extiende de file (archivo raíz)
+		if ('extends '+file[:file.find('.')]) in auxFile: #Si el auxFile extiende de file (archivo raíz)
 			depth = depth + 1
 			return DIP(f,depth,files)
 		else:
