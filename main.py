@@ -3,28 +3,31 @@
 from os import listdir #Ésta librería nos permite listar los archivos contenidos en un dir.
 from os.path import isfile, join
 from collections import Counter
+from nodo import Nodo
+from arboln import Arboln
 
 #Variables
-keyWords = ["if","while","for","switch"]
+keyWords = ["if","while","for","switch,"]
 fileContent = 0
 auxFile = 0
 path = 0
 files = []
 
+
 #Funciones
-#DIP (list,int,string)
-#file es un archivo (el archivo raíz)
-#depth es un contador de la altura del árbol
-#files es una lista de todos los archivos
-def DIP(file,depth,files): 
-	#Vamos a comparar con todos los demás archivos para ver si alguno extiende de file
-	for f in files:
-		auxFile = open(join(path,f),"r").read() #Contenido del archivo f
-		if ('extends '+file[:file.find('.')]) in auxFile: #Si el auxFile extiende de file (archivo raíz)
-			depth = depth + 1
-			return DIP(f,depth,files)
-		else:
-			return depth
+def DIP(file,height):
+	if os.path.exists(join(path,file)): #Si el archivo existe en la carpeta indicada
+		file = open(file,"r").read() #Leemos el contenido del archivo
+		parents = [] #Todos los padres aquí jiji
+		length = 0
+		auxFile = open(join(path,file),"r").read() #Contenido del archivo
+		for x in file[file.find('extends'):file.find('{')].split():
+			if x != 'extends' and x != 'implements' and x != ',':
+			parents.append(x) #Si la cadena es una clase entonces agregala
+		for p in parents:
+			return height + DIP(p,length)
+	else:
+		return height
 
 
 #WMC(string)
@@ -47,6 +50,5 @@ for file in files:
 		continue
 	try:
 		#print("In file "+file+" WMC="+str(WMC(fileContent)))
-		print("In file "+file+" DIP="+str(DIP(file,0,files)))
 	except FileNotFoundError:
 		print("El archivo "+file+" extiende de una clase ubicada en una libreria")
