@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-
+import sys # ello syster
 from os import listdir #Ésta librería nos permite listar los archivos contenidos en un dir.
-from os.path import isfile, join
-from collections import Counter
-from nodo import Nodo
-from arboln import Arboln
+from os.path import isfile, join, exists
 
 #Variables
 keyWords = ["if","while","for","switch,"]
@@ -16,19 +13,16 @@ files = []
 
 #Funciones
 def DIP(file,height):
-	if os.path.exists(join(path,file)): #Si el archivo existe en la carpeta indicada
-		file = open(file,"r").read() #Leemos el contenido del archivo
+	if exists(join(path,file)): #Si el archivo existe en la carpeta indicada
+		auxFile = open(join(path,file),"r").read() #Leemos el contenido del archivo
 		parents = [] #Todos los padres aquí jiji
-		length = 0
-		auxFile = open(join(path,file),"r").read() #Contenido del archivo
-		for x in file[file.find('extends'):file.find('{')].split():
+		for x in auxFile[auxFile.find('extends'):auxFile.find('{')].split():
 			if x != 'extends' and x != 'implements' and x != ',':
-			parents.append(x) #Si la cadena es una clase entonces agregala
+				parents.append(x+file[file.find('.'):]) #Si la cadena es una clase entonces agregala
 		for p in parents:
-			return height + DIP(p,length)
+			return DIP(p,height+1)
 	else:
 		return height
-
 
 #WMC(string)
 #file es un String con todo el contenido del archivo
@@ -50,5 +44,6 @@ for file in files:
 		continue
 	try:
 		#print("In file "+file+" WMC="+str(WMC(fileContent)))
-	except FileNotFoundError:
-		print("El archivo "+file+" extiende de una clase ubicada en una libreria")
+		print("In file "+file+" DIP="+str(DIP(file,0)))
+	except Exception as Err:
+		print(Err)
