@@ -38,11 +38,14 @@ class Analyzer:
 		if exists(join(self.path,file)): #Si el archivo existe en la carpeta indicada
 			auxFile = open(join(self.path,file),"r").read() #Leemos el contenido del archivo
 			parents = [] #Todos los padres aquí jiji
-			for x in auxFile[auxFile.find('extends'):auxFile.find('{')].split():
-				if x != 'extends' and x != 'implements' and x != ',':
+			for x in auxFile[auxFile.find('class'):auxFile.find('{')].split():
+				if x != 'extends' and x != 'implements' and x != ',' and x != 'class':
 					parents.append(x+file[file.find('.'):]) #Si la cadena es una clase entonces agregala
-			for p in parents:
-				return self.dit(p,height+1)
+			if len(parents)==0:
+				for p in parents:
+					return self.dit(p,height+1)
+			else:
+				return height
 		else:
 			return height
 

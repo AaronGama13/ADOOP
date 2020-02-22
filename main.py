@@ -20,8 +20,12 @@ files = [file for file in listdir(path) if isfile(join(path,file))]
 myAnalizer = Analyzer(path,files[0][:files[0].find('.')])
 
 for file in files:
-	print("In file "+file+" WCM="+str(myAnalizer.wmc(file)))
-	print("In file "+file+" DIT="+str(myAnalizer.dit(file,0)))
-	myAnalizer.noc(file)
+	try:
+		print("In file "+file+" WCM="+str(myAnalizer.wmc(file)))
+		print("In file "+file+" DIT="+str(myAnalizer.dit(file,0)))
+		myAnalizer.noc(file)	
+	except UnicodeDecodeError:
+		print("Unexpected error decoding "+file+"")
+		continue
 print("NOC:")
 print(myAnalizer.nocs)
