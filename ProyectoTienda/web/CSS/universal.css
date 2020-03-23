@@ -1,0 +1,28 @@
+html{
+    background: #ade79a;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 15px;
+}
+
+td{
+    align-content: center;
+    align-items: center;
+}
+
+header{
+    background: #346d6b;
+    border-radius: 5px;
+    height: 30%;
+}
+
+a{
+    color: #ffffff;
+    font-size: 1.9em;
+    text-decoration: none;    
+}
+
+.view_cart{
+    float:right;
+    margin-right: 15px;
+    border-radius: 50%;
+}
