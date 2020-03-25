@@ -44,21 +44,26 @@
         <!--Scripts-->
 	<!--Estilos-->
 	<link rel="stylesheet" type="text/css" href="CSS/carrito.css">
+        <link rel="stylesheet" type="text/css" href="CSS/universal.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
     </head>
     <body>
         <!--Cabecera-->
-	<header id="cabecera">
-		<div id="logo">
-			<h1>UPMIXLOGO</h1>
-		</div>
-		<nav id="menu">
-			<ul>
-				<li><a href="#">Perfil</a></li>
-				<li><a href="#">Catálogo</a></li>
-			</ul>
-		</nav>
-	</header>
+	<nav class="navbar navbar-expand-lg">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="navbar-item">
+                        <img src="assets/icons/logo.png" class="logo">
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link products-link" href="productos.jsp">Productos</a>
+                    </li>
+                </ul>
+                <a href="ajustes.jsp"><img src="assets/icons/profile.png" class="profile"></a>
+                <a href="carrito.jsp"><img src="assets/icons/cart.png" class="cart"></a>
+            </div>
+        </nav>		
 	<div class="clearfix"></div>
 	<section id="global">
 		<div id="carrito">
@@ -95,7 +100,9 @@
                                         out.print("<p>$" + p.getPrecio() + "</p>");
                                         out.print("</div><br><br>");
                                         out.print("<div id='btn-remover'>");
-                                        out.print("<form method='post' action='ServletCarrito?accion=quitar&id="+ p.getId() +"'>");
+                                        out.print("<form method='get' action='ServletCarrito'>");
+                                        out.print("<input type='hidden' name='accion' value='quitar'>");
+                                        out.print("<input type='hidden' name='id' value='"+ p.getId() +"'>");
                                         out.print("<input type='submit' name='remover' id='remover' value='remover'>");                                        
                                         out.print("</form>");
                                         out.print("</div>");

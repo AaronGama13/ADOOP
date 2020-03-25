@@ -1,28 +1,39 @@
-html{
-    background: #ade79a;
-    font-family: 'Titillium Web', sans-serif;
-    font-size: 15px;
+nav{
+	background-color: black;
+	color: white;
 }
 
-td{
-    align-content: center;
-    align-items: center;
+.profile, .cart{
+	margin: 10px;
+	float: right;
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 50%;
 }
 
-header{
-    background: #346d6b;
-    border-radius: 5px;
-    height: 30%;
+.logo{
+	width: 9em;
+	height: 3em;
+	margin-right: 2em;
 }
 
-a{
-    color: #ffffff;
-    font-size: 1.9em;
-    text-decoration: none;    
+.products-link {
+	font-family: 'Roboto', sans-serif;
+	color: white;
+	vertical-align: middle;
+	margin-left: 2em;
 }
 
-.view_cart{
-    float:right;
-    margin-right: 15px;
-    border-radius: 50%;
+.products-link:hover{
+	animation: glow 1s ease-in-out infinite alternate;
+	color: white;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 5px #fff;
+  }
+  to {
+    text-shadow: 0 0 7px #fff, 0 0 7px #fff;
+  }
 }

@@ -22,14 +22,6 @@
     String msj = "";
     ArrayList<Producto> Carrito = new ArrayList<Producto>();
     int[][] Cantidad = new int[100][2];
-    if(sesionOK.getAttribute("usuario") != null){
-        //RECUPERAMOS LOS DATOS DE LA SESIÓN
-        username = (String) sesionOK.getAttribute("usuario");
-        priv = (String) sesionOK.getAttribute("priv");
-        Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
-        Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");
-        msj = (String) sesionOK.getAttribute("msj");
-    }
     %>
 
 <!DOCTYPE html>
@@ -39,6 +31,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Catálogo de productos</title>
             <link rel="stylesheet" href="CSS/catalogo.css" type="text/css">
+            <link rel="stylesheet" href="CSS/universal.css" type="text/css">
             <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
@@ -50,11 +43,25 @@
                         <img src="assets/icons/logo.png" class="logo">
                     </li>
                     <li class="navbar-item">
-                        <a class="nav-link products-link" href="#">Productos</a>
+                        <a class="nav-link products-link" href="productos.jsp">Productos</a>
                     </li>
                 </ul>
-                <a href="ajustes.jsp"><img src="assets/icons/profile.png" class="profile"></a>
-                <a href="carrito.jsp"><img src="assets/icons/cart.png" class="cart"></a>
+                <%
+                    if(sesionOK.getAttribute("usuario") != null){
+                        //RECUPERAMOS LOS DATOS DE LA SESIÓN
+                    username = (String) sesionOK.getAttribute("usuario");
+                    priv = (String) sesionOK.getAttribute("priv");
+                    if(!priv.equals("A")){
+                        Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
+                        Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");                
+                        msj = (String) sesionOK.getAttribute("msj");
+                        out.print("<a href='ajustes.jsp'><img src='assets/icons/profile.png' class='profile'></a>");
+                        out.print("<a href='carrito.jsp'><img src='assets/icons/cart.png' class='cart'></a>");
+                    }
+                    }else{
+                        out.print("<a class='nav-link products-link' href='index.jsp'>Registrarse / Iniciar sesión</a>");    
+                    }
+            %>    
             </div>
         </nav>		
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -107,6 +114,8 @@
                         }else{
                             out.print("<p class='title'>Catálogo de CDs</p>");
                         }
+                    }else{
+                        out.print("<p class='title'>Catálogo de productos</p>");
                     }                
                     Conexion con = new Conexion();
                     Producto aux;
