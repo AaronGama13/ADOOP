@@ -77,22 +77,25 @@
                 </div>
                 <div class="menu-overlay">
                     <form action="productos.jsp" method="post" id="filter-form">
+                        <input type="hidden" name="filter" value="L">
                         <div class="filter-menu">
                             <div class="menu-item">
-                                <input type="hidden" name="filter" value="L">
-                                <a id="filter-link">
+                                <a>
                                     <img src="assets/icons/book.png" width="20" height="20">
                                     <p>Libros</p>
                                 </a>
                             </div>
                             <div class="menu-item">
-
-                                <img src="assets/icons/movie.png" width="20" height="20">
-                                <p>Películas</p>
+                                <a>
+                                    <img src="assets/icons/movie.png" width="20" height="20">
+                                    <p>Películas</p>
+                                </a>
                             </div>
                             <div class="menu-item">
-                                <img src="assets/icons/cd.png" width="20" height="20">
-                                <p>Música</p>
+                                <a>
+                                    <img src="assets/icons/cd.png" width="20" height="20">
+                                    <p>Música</p>
+                                </a>
                             </div>
                         </div>
                     </form>
