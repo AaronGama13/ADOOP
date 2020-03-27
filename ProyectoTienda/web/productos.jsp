@@ -36,7 +36,7 @@
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg  ">
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="navbar-item">
@@ -45,6 +45,23 @@
                     <li class="navbar-item">
                         <a class="nav-link products-link" href="productos.jsp">Productos</a>
                     </li>
+                    <c:if test=" sesionOK.getAttribute('usuario') != null">
+                        
+      <li class="nav-item dropdown  ">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%
+                    if(sesionOK.getAttribute("usuario") != null){
+                    username = (String) sesionOK.getAttribute("usuario");
+                        out.print(username);
+                    }
+            %>    
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a href='password.jsp'>Cambiar contraseña</a>
+        </div>
+      </li>
+                        
+                    </c:if>          
                 </ul>
                 <%
                     if(sesionOK.getAttribute("usuario") != null){

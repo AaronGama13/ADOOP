@@ -35,6 +35,8 @@ public class Sentencias {
     private static final String MAX_NOPEDIDO = "SELECT MAX(noPedido) as max from productocompra";   
     private static final String SELECT_VENTAS = "SELECT * FROM compra";
     private static final String SELECT_NOVENTAS = "SELECT * FROM compra natural join productocompra WHERE NoPedido = ?";
+    
+    private static final String UPDATE_USER_PASSWORD = "UPDATE usuario SET pass=? WHERE username=?";
     public static int createUsuario(String [] params){
         try{
             Connection cnx = Conexion.getConexion();
@@ -344,4 +346,20 @@ public class Sentencias {
         }
         return rs;
     }
+    
+    
+    
+    public static int updateUsuario(String[] params){
+        try{
+            PreparedStatement ps = Conexion.getConexion().prepareStatement(UPDATE_USER_PASSWORD);
+            ps.setString(1,params[0]);
+            ps.setString(2,params[2]);
+            return ps.executeUpdate();
+        }catch(SQLException e){
+            System.out.println("ERROR (Sentencias.updateUsuario): "+e.getMessage());
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 }   
