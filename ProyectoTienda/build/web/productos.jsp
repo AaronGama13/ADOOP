@@ -47,19 +47,7 @@
                     </li>
                     <c:if test=" sesionOK.getAttribute('usuario') != null">
                         
-      <li class="nav-item dropdown  ">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%
-                    if(sesionOK.getAttribute("usuario") != null){
-                    username = (String) sesionOK.getAttribute("usuario");
-                        out.print(username);
-                    }
-            %>    
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a href='password.jsp'>Cambiar contraseña</a>
-        </div>
-      </li>
+      
                         
                     </c:if>          
                 </ul>
@@ -72,8 +60,16 @@
                         Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
                         Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");                
                         msj = (String) sesionOK.getAttribute("msj");
-                        out.print("<a href='ajustes.jsp'><img src='assets/icons/profile.png' class='profile'></a>");
-                        out.print("<a href='carrito.jsp'><img src='assets/icons/cart.png' class='cart'></a>");
+                        out.print(username);%>
+                        <li class="nav-item dropdown  ">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <%out.print("<a href='ajustes.jsp'><img src='assets/icons/profile.png' class='profile'></a>");%>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a href='password.jsp'>Cambiar contraseña</a>
+                            </div>
+                        </li>
+                        <%out.print("<a href='carrito.jsp'><img src='assets/icons/cart.png' class='cart'></a>");
                     }
                     }else{
                         out.print("<a class='nav-link products-link' href='index.jsp'>Registrarse / Iniciar sesión</a>");    

@@ -97,7 +97,6 @@
                                             
                           <%}else{
                               out.print("<div class='product-title'>"+aux.getNombre()+"</div>");
-                              out.print("<div class='product-desc'>tipo de producto</div>");
                               out.print("<div class='product-price'>$"+aux.getPrecio()+"</div>");
                               out.print("<div class='product-stock'>In Stock</div><hr>");
                               out.print("<div class='product-desc'>"+aux.getDetalles()+"</div><hr>");
