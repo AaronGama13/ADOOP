@@ -35,6 +35,9 @@ public class Sentencias {
     private static final String MAX_NOPEDIDO = "SELECT MAX(noPedido) as max from productocompra";   
     private static final String SELECT_VENTAS = "SELECT * FROM compra";
     private static final String SELECT_NOVENTAS = "SELECT * FROM compra natural join productocompra WHERE NoPedido = ?";
+
+  private static final String UPDATE_USER_PASSWORD = "UPDATE usuario SET pass=? WHERE username=?";
+    private static final String UPDATE_USER_INFO = "UPDATE usuario SET username=?,priv=?,np=?,ap=?,am=?,calle=?,noExt=?,noInt=?,col=?,alc=?,muni=?,edo=?,cd=?,cp=?,tel=? WHERE username=?";
     public static int createUsuario(String [] params){
         try{
             Connection cnx = Conexion.getConexion();
@@ -52,7 +55,7 @@ public class Sentencias {
             ps.setString(11,params[10]); //muni (municipio)
             ps.setString(12,params[11]); //edo
             ps.setString(13,params[12]); //cd (ciudad)
-            ps.setInt(14,Integer.parseInt(params[13]));
+            ps.setInt(14,Integer.parseInt(params[13]));//cp
             ps.setString(15, params[14]); //numero de telefono
             ps.setString(16,params[15]); //password         
             return ps.executeUpdate();
@@ -343,5 +346,52 @@ public class Sentencias {
             System.out.println("ERROR");
         }
         return rs;
+    }
+
+    
+    
+    
+    public static int updateUsuario(String[] params){
+        try{
+            PreparedStatement ps = Conexion.getConexion().prepareStatement(UPDATE_USER_PASSWORD);
+            ps.setString(1,params[0]);
+            ps.setString(2,params[2]);
+            return ps.executeUpdate();
+        }catch(SQLException e){
+            System.out.println("ERROR (Sentencias.updateUsuario): "+e.getMessage());
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
+    
+    public static int updateUsuario2(String [] params){
+        try{
+            Connection cnx = Conexion.getConexion();
+            PreparedStatement ps = cnx.prepareStatement(UPDATE_USER_INFO);
+
+            ps.setString(1,params[0]); //username
+            ps.setString(2, params[1]);//privilegio
+            ps.setString(3,params[2]); //np (nombre de pila)
+            ps.setString(4,params[3]); //ap (apellido paterno)
+            ps.setString(5,params[4]); //am (apellido materno)
+            ps.setString(6,params[5]); //calle 
+            ps.setInt(7,Integer.parseInt(params[6])); //no. Exterior
+            ps.setInt(8,Integer.parseInt(params[7])); //no. Interior
+            ps.setString(9,params[8]); //col 
+            ps.setString(10,params[9]); //alc (alcaldia)
+            ps.setString(11,params[10]); //muni (municipio)
+            ps.setString(12,params[11]); //edo
+            ps.setString(13,params[12]); //cd (ciudad)
+            ps.setInt(14,Integer.parseInt(params[13]));//cp
+            ps.setString(15, params[14]); //numero de telefono
+            ps.setString(16,params[15]);//usuario que cambio o id de usuario       
+            return ps.executeUpdate();
+        }catch(Exception error){
+            System.out.println("ERROR (Sentencias.updateUsuario2): "+error);
+            error.printStackTrace();
+            return 0;
+        }
+
     }
 }   
