@@ -57,7 +57,7 @@
 			<header id="tu-carrito">
 				<h1>Tu carrito</h1>
 				<div class="carroC">	
-					<img src="IMG/carrito.png">
+					<img src="assets/icons/cart.png">
 				</div>
 				<div class="clearfix"></div>
 			</header>
@@ -139,6 +139,7 @@
 			<div id="pagar">
 				<form>
 					<input type="submit" name="pagar" id="btn-pagar" value="pagar">
+                                        <input type="submit" name="vaciar" id="btn-vaciar" value="Vaciar carrito">
 				</form>
 			</div>
 			<button id="seguir-comprando">Seguir comprando</button>
