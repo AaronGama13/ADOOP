@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="CSS/normalize.min.css">
         <link rel="stylesheet" href="CSS/style2.css">
     </head>
+    
     <body>
         <div class="form">
             <ul class="tab-group">

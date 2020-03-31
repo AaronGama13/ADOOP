@@ -32,52 +32,13 @@
             <title>Catálogo de productos</title>
             <link rel="stylesheet" href="CSS/catalogo.css" type="text/css">
             <link rel="stylesheet" href="CSS/universal.css" type="text/css">
-            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">             
+            <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
     </head>
-    <body>
-        <nav class="navbar navbar-expand-lg  ">
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="navbar-item">
-                        <img src="assets/icons/logo.png" class="logo">
-                    </li>
-                    <li class="navbar-item">
-                        <a class="nav-link products-link" href="productos.jsp">Productos</a>
-                    </li>
-                    <c:if test=" sesionOK.getAttribute('usuario') != null">
-                        
-      
-                        
-                    </c:if>          
-                </ul>
-                <%
-                    if(sesionOK.getAttribute("usuario") != null){
-                        //RECUPERAMOS LOS DATOS DE LA SESIÓN
-                    username = (String) sesionOK.getAttribute("usuario");
-                    priv = (String) sesionOK.getAttribute("priv");
-                    if(!priv.equals("A")){
-                        Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
-                        Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");                
-                        msj = (String) sesionOK.getAttribute("msj");
-                        out.print(username);%>
-                        <li class="nav-item dropdown  ">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <%out.print("<a href='ajustes.jsp'><img src='assets/icons/profile.png' class='profile'></a>");%>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a href='password.jsp'>Cambiar contraseña</a>
-                            </div>
-                        </li>
-                        <%out.print("<a href='carrito.jsp'><img src='assets/icons/cart.png' class='cart'></a>");
-                    }
-                    }else{
-                        out.print("<a class='nav-link products-link' href='index.jsp'>Registrarse / Iniciar sesión</a>");    
-                    }
-            %>    
-            </div>
-        </nav>		
+    <body>            
+            <jsp:include page="navbar.jsp" />         
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="assets/imgs/uno.jpg" class="d-block w-100">
@@ -167,10 +128,8 @@
         </footer>
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            
-            
+        
+        <script type="text/javascript">                        
             function agregar_carrito(){
                 alert("Producto agregado al carrito de compras");
             }

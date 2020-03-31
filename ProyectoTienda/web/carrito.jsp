@@ -50,20 +50,7 @@
     </head>
     <body>
         <!--Cabecera-->
-	<nav class="navbar navbar-expand-lg">
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="navbar-item">
-                        <img src="assets/icons/logo.png" class="logo">
-                    </li>
-                    <li class="navbar-item">
-                        <a class="nav-link products-link" href="productos.jsp">Productos</a>
-                    </li>
-                </ul>
-                <a href="ajustes.jsp"><img src="assets/icons/profile.png" class="profile"></a>
-                <a href="carrito.jsp"><img src="assets/icons/cart.png" class="cart"></a>
-            </div>
-        </nav>		
+	<jsp:include page="navbar.jsp" />	
 	<div class="clearfix"></div>
 	<section id="global">
 		<div id="carrito">

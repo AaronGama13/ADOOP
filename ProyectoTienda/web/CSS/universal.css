@@ -29,6 +29,11 @@ nav{
 	color: white;
 }
 
+.green-bg{  
+  background: #ade79a;
+  
+}
+
 @-webkit-keyframes glow {
   from {
     text-shadow: 0 0 5px #fff, 0 0 5px #fff;
@@ -36,4 +41,8 @@ nav{
   to {
     text-shadow: 0 0 7px #fff, 0 0 7px #fff;
   }
+}
+
+html{
+    max-height: 50px;
 }
