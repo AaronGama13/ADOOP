@@ -79,7 +79,7 @@
                                             continue;
                                         out.print("<div class='articulo'>");    
                                         out.print("<li>");
-                                        out.print("<img src='IMG/img1.jpg'id='imagen'>");
+                                        out.print("<img src='data:image/jpg;base64, " + p.getFoto() + "'id='imagen'>");
                                         out.print("<div id='descripcion'>");
                                         out.print("<p>" + p.getNombre() + "</p>");
                                         out.print("</div>");
