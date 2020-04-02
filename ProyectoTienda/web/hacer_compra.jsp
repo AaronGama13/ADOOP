@@ -38,7 +38,10 @@
         <section id="contenedor">
             <div id="detalles">
                 <h4>Pagar</h4>          
-                <form action="" method="post">
+                <form action="ServletCarrito?accion=tarjeta&id=0" method="POST">
+                    <a href='ServletCarrito?accion=Tarjeta&id=0'>
+                            <button name="VISA" id="VISA" class="visible"> VISA</button>
+                        </a>
                     <span>Ingrese los datos de su tarjeta de crédito</span>
                     <input type="text" name="nom-tarjeta" placeholder="Nombre en la tarjeta" id="nom-tarjeta">
                     <input type="number" name="num-tarjeta" placeholder="Número de la tarjeta"
@@ -59,8 +62,10 @@
                             out.print("<option value='"+ i +"'>"+ i +"</option>");
                         }%>
                     </select>
-                    <input type="number" max="3" id="cvc" placeholder="CVC">
-                </form>
+                    <input type="number" max="3" id="cvc" placeholder="CVC"><br>
+                    
+                    <input type="submit" id="comprar" value="Realizar pago" name="comprar">
+                </form>                                    
             </div>                 
             <div id="resumen">
                 <h4>Resumen</h4>
