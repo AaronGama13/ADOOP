@@ -46,7 +46,7 @@
                     </div>
                         
                     <div class="col-md-6 product-info form-group">                        
-                        <%      if(priv.equals("A")){%>
+                        <%      if(priv.equalsIgnoreCase("A")){%>
                         <div class='product-title'>Modificar Producto</div><hr>
                                 <form action="ServletModProd" method="POST" >
                                         <% out.print("<input name='id' type='hidden' value='"+idProducto+"'>"); %>
