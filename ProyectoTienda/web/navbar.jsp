@@ -47,7 +47,7 @@
             if (sesionOK.getAttribute("usuario") != null) {
                 username = (String) sesionOK.getAttribute("usuario");
                 priv = (String) sesionOK.getAttribute("priv");
-                if(priv.equals("u")){
+                if(priv.equalsIgnoreCase("u")){
                     Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
                     Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");
                     msj = (String) sesionOK.getAttribute("msj");
@@ -73,13 +73,13 @@
                                     </button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a href='password.jsp'>Cambiar contraseña</a></li>
-                                    <li><a href='ajustes.jsp'>Ajustes</a></li>
+                                    <li><a href="cuenta.jsp">Cuenta</a></li>
                                 </ul>
                             </div>                                                                                     
 
                         </div>
                     </nav>	
-        <%      } else if(priv.equals("A")){ %>
+        <%      } else if(priv.equalsIgnoreCase("A")){ %>
                     <nav class="navbar navbar-expand-lg  ">
                         <div class="collapse navbar-collapse">
                             <ul class="navbar-nav mr-auto">
@@ -90,10 +90,10 @@
                                     <a class="nav-link products-link" href="productos.jsp">Productos</a>                                    
                                 </li>
                                 <li class="navbar-item">
-                                    <a class="nav-link products-link" href="productos.jsp">Agregar Producto</a>
+                                    <a class="nav-link products-link" href="aniadir_producto.jsp">Agregar Producto</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a class="nav-link products-link" href="productos.jsp">Ventas</a>                                    
+                                    <a class="nav-link products-link" href="ventas.jsp">Ventas</a>                                    
                                 </li>
                             </ul>                                      
                             <div class="dropdown">                                                                
@@ -110,7 +110,23 @@
 
                         </div>
                     </nav>
-        <%      }
+        <%      }else{  %>
+                    <nav class="navbar navbar-expand-lg  ">
+                        <div class="collapse navbar-collapse">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="navbar-item">
+                                    <img src="assets/icons/logo.png" class="logo">
+                                </li>
+                                <li class="navbar-item">
+                                    <a class="nav-link products-link" href="productos.jsp">Productos</a>
+                                </li>                          
+                            </ul>                
+                            <a class='nav-link products-link' href='index.jsp'>Registrarse / Iniciar sesión</a>                
+
+                        </div>
+                    </nav>
+
+                <%}
             }else{ 
         %>            
                 <nav class="navbar navbar-expand-lg  ">

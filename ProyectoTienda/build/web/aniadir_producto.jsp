@@ -11,29 +11,80 @@
     if(sesionOK.getAttribute("usuario") != null){
         username = (String) sesionOK.getAttribute("usuario");
         priv = (String) sesionOK.getAttribute("priv");        
+    }else{
+        response.sendRedirect("productos.jsp");
     }
     %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Añadir Producto</title>
+        <title>Detalles del Producto</title>
+        <!--Scripts-->
+	<!--Estilos-->
+	<link rel="stylesheet" type="text/css" href="CSS/carrito.css">
+        <link rel="stylesheet" type="text/css" href="CSS/universal.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="CSS/detalles.css">
     </head>
-    <body>
-    <center><h1>Añadir producto</h1></center>
-    <form action="ServletAniadir" method="POST" enctype="multipart/form-data">
-            <center>
-                <input type="text" name="nom" placeholder="Nombre del producto"><br><br>
-                <input type="number" name="precio" step="0.01" placeholder="Precio"><br><br>
-                <input type="number" name="stock" placeholder="Cantidad"><br><br>
-                <input type="text" name="tipo" placeholder="Tipo de producto"><br><br>
-                <label>Imagen</label><br><br>
-                <input type="file" name="foto" required><br><br>
-                <textarea spellcheck="true" name="detalles" placeholder="Detalles"></textarea><br><br>
-                <label>Añadir</label><br><br>
-                <input type="submit">
-            </center>
-        </form>
+    <body>        
+            <jsp:include page="navbar.jsp" />                    
+        <center>
+            <div class="content-wrapper">
+                <div class="container form">   
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8 product-info form-group details-container">                        
+                            <% if(priv.equalsIgnoreCase("A")){%>                                                       
+
+
+                                            <form action="ServletAniadir" method="POST" enctype="multipart/form-data">
+
+                                                    <div class='product-title text-center'>Agregar Producto</div><hr>
+                                                    <div class="field-wrap">                                            
+                                                        Nombre:                                            
+                                                        <input name="nom" class='form-control' type='text'>
+                                                    </div>                                
+                                                    <div class="field-wrap">                                                
+                                                        Precio:
+                                                        <input name='precio' class='form-control' type='number' step="0.01">
+                                                        <small id="moneda" class="form-text text-muted">mxn</small>
+                                                    </div>
+                                                    <div class="field-wrap">                                                    
+                                                        Stock:                                                    
+                                                        <input name='stock' class='form-control' type='number' >
+                                                        <small id="unidades" class="form-text text-muted">Unidades Disponibles</small>
+                                                    </div>
+                                                    <div class="field-wrap">                                                    
+                                                        Tipo de Producto:
+                                                        <select class="form-control" name='tipo'>
+                                                          <option value="L">Libro</option>
+                                                          <option value="P">Pelicula</option>
+                                                          <option value="M">Musica</option>                                                          
+                                                        </select>                                                        
+                                                    </div>
+                                                    <div class="field-wrap">                                                    
+                                                        Imagen
+                                                        <input type="file" name="foto" class='form-control' required>
+                                                    </div>
+                                                    <div class="field-wrap">
+                                                        Detalles:
+                                                        <textarea spellcheck="true" class='form-control' name='detalles'></textarea>
+                                                    </div>
+                                                    <input type='submit' value='Agregar Producto' class='btn btn-success'>                                                                                        
+                                            </form>
+
+                            <%} %>
+                        </div>                        
+                        <div class="col-md-2"></div>
+                    </div>
+                        </div>
+                        </div>
+                </center>
+                                        
     </body>
 </html>
+

@@ -33,7 +33,7 @@
             <link rel="stylesheet" href="CSS/catalogo.css" type="text/css">
             <link rel="stylesheet" href="CSS/universal.css" type="text/css">
             <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">             
-            <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">          
     </head>
     <body>            
             <jsp:include page="navbar.jsp" />         
@@ -92,15 +92,15 @@
                             out.print("<p class='title'>Catálogo de CDs</p>");
                         }
                     }else{
-                        out.print("<p class='title'>Catálogo de productos</p>");
+                        out.print("<p class='title'>Catálogo de productos</p><hr>");
                     }                
                     Conexion con = new Conexion();
                     Producto aux;
                     ArrayList<Producto> productos = Sentencias.readProductos(tipo);
                     for (Producto p : productos) {
                         out.print("<div class='product-container'>");
-                            out.print("<div class='product-img'>");
-                                out.print("<img id='id_img' src='data:image/jpg;base64,"+p.getFoto()+"'>");
+                            out.print("<div class='product-img'>");                            
+                                out.print("<img class='img-div img-fluid rounded d-block m-l2-none' id='id_img' src='data:image/jpg;base64,"+p.getFoto()+"'>");
                                 out.print("<div class='product-overlay'></div>");
                                 out.print("<div class='btn-add'><a href='ServletCarrito?accion=agregar&id="+p.getId()+"' onclick=\"agregar_carrito();\">Comprar</a></div>");
                                 out.print("<div class='btn-details'><a href='detalles.jsp?sku="+p.getId()+"'>Ver detalles</a></div>");
