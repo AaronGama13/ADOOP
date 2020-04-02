@@ -70,7 +70,7 @@
                 <span class="span-precio">-$100</span><hr>
                 <span>Total</span>
                 <span class="span-precio">$900</span>
-                <form action="action">
+                <form action="">
                     <input type="submit" id="comprar" value="Realizar pago" name="comprar">
                 </form>
             </div> 
