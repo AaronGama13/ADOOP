@@ -14,7 +14,7 @@ public class Conexion {
 	private static final String DATABASE = "tienda";
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private static final String USERNAME = "root";
-	private static final String PASSWORD = "n0m3l0";
+	private static final String PASSWORD = "";
 	private static Connection cnx = null;
 
 	public static Connection getConexion(){

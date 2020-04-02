@@ -73,7 +73,7 @@
                                     </button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a href='password.jsp'>Cambiar contraseña</a></li>
-                                    <li><a href='ajustes.jsp'>Ajustes</a></li>
+                                    <li><a href="cuenta.jsp">Cuenta</a></li>
                                 </ul>
                             </div>                                                                                     
 

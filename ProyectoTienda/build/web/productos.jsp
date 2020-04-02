@@ -33,7 +33,7 @@
             <link rel="stylesheet" href="CSS/catalogo.css" type="text/css">
             <link rel="stylesheet" href="CSS/universal.css" type="text/css">
             <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">             
-            <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">          
     </head>
     <body>            
             <jsp:include page="navbar.jsp" />         

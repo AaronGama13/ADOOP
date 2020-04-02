@@ -62,9 +62,10 @@
                             out.print("<option value='"+ i +"'>"+ i +"</option>");
                         }%>
                     </select>
-                    <input type="number" max="3" id="cvc" placeholder="CVC"><br>
-                    
+                    <input type="number" id="cvc" placeholder="CVC"><br>   
+                    <div class="clearfix"></div>
                     <input type="submit" id="comprar" value="Realizar pago" name="comprar">
+                    <div class="clearfix"></div>
                 </form>                                    
             </div>                 
             <div id="resumen">
@@ -73,11 +74,8 @@
                 <span class="span-precio">$1000</span>
                 <span>Descuento</span>
                 <span class="span-precio">-$100</span><hr>
-                <span>Total</span>
-                <span class="span-precio">$900</span>
-                <form action="">
-                    <input type="submit" id="comprar" value="Realizar pago" name="comprar">
-                </form>
+                <span id="total">Total</span>
+                <span class="span-precio" id="precio-total">$900</span>
             </div> 
         </section>
     </body>
