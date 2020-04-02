@@ -47,7 +47,7 @@
             if (sesionOK.getAttribute("usuario") != null) {
                 username = (String) sesionOK.getAttribute("usuario");
                 priv = (String) sesionOK.getAttribute("priv");
-                if(priv.equals("a")){
+                if(priv.equals("u")){
                     Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
                     Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");
                     msj = (String) sesionOK.getAttribute("msj");

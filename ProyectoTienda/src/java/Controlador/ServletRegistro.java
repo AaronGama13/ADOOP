@@ -30,7 +30,7 @@ public class ServletRegistro extends HttpServlet {
             String [] params = new String[16];
             
             params[0] = request.getParameter("username");
-            params[1] = "a";
+            params[1] = "u";
             params[2] = request.getParameter("np");
             params[3] = request.getParameter("ap");
             params[4] = request.getParameter("am");

@@ -138,11 +138,12 @@
 			</div>
 			<div id="pagar">
 				<form>
-					<input type="submit" name="pagar" id="btn-pagar" value="pagar">
+                                        <a href="hacer_compra.jsp" id="btn-pagar">Pagar</a>
+					<!--<input type="submit" name="pagar" id="btn-pagar" value="pagar">-->
                                         <input type="submit" name="vaciar" id="btn-vaciar" value="Vaciar carrito">
 				</form>
 			</div>
-			<button id="seguir-comprando">Seguir comprando</button>
+                    <button id="seguir-comprando"><a href="productos.jsp">Seguir comprando</a></button>
 		</div>
 		<div class="clearfix"></div>
 	</section>
