@@ -4,6 +4,7 @@
     Author     : AnonimusCrack
 --%>
 
+<%@page import="Modelos.Producto"%>
 <%@page import="Database.Sentencias"%>
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,7 +15,7 @@
     String username = (String) sesionOK.getAttribute("usuario");
     String priv = (String) sesionOK.getAttribute("priv");
     String comprador;
-    ResultSet Compra = (ResultSet) sesionOK.getAttribute("rs");
+    ResultSet Compra = (ResultSet) sesionOK.getAttribute("rs");            
     if(sesionOK.getAttribute("usuario") == null){
         response.sendRedirect("index.jsp");
     }
@@ -33,65 +34,122 @@
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        <center>            
-            <div>
-                <%
-                Compra.next();
-                out.print("<h1>Venta con No.Pedido " +  Compra.getInt("noPedido") + " </h1>");
-                %>
-                <table>
-                    <tr>
-                        <td width='200'><center>Fecha:</center></td>
-                        <td width='150'><center>Comprador:</center></td>
-                    </tr>
-                    <tr>
-                    <%
-                        out.print("<td><center> " + Compra.getTimestamp("fecha") + "</center></td>");
-                        out.print("<td><center> " + Compra.getString("comprador") + "</center></td>");
-                        comprador=Compra.getString("comprador");
-                    %>
-                    </tr>
-                </table>
-                <br><br><br>
-                <table>
-                    <tr>
-                        <td width='50'><center>idProducto</center></td>
-                        <td width='150'><center>Nombre del Producto</center></td>
-                        <td width='50'><center>Cantidad</center></td>
-                    </tr>
-                    <%
-                        do{
-                            out.print("<tr>");
-                            out.print("<td><center> " + Compra.getInt("idProducto") + "</center></td>");
-                            out.print("<td><center> " + Compra.getString("nomProducto") + "</center></td>");
-                            out.print("<td><center> " + Compra.getInt("cantidadProdcuto") + "</center></td>");
-                            out.print("</tr>");
-                        }while(Compra.next()); %>
-                </table>
-                <br>
-                <br>
-                <%if(priv.equals("A")){
-                    out.print("Etiqueta de envio<div class='etiqueta'>");
-                    ResultSet envio = Sentencias.datosEnvio(comprador);
-                    while(envio.next()){
-                        out.print(envio.getString("np")+ " " +envio.getString("ap")+ " " +envio.getString("am")+"<br>");
-                        out.print(envio.getString("calle")+" "+envio.getInt("noExt")+" ");
-                        if(envio.getInt("noInt")!=0){
-                            out.print(envio.getInt("noInt")+"<br>");
-                        }else{
-                            out.print("<br>");
-                        }
-                        out.print(envio.getString("alc")+"<br>"+envio.getString("col")+"<br>");
-                        out.print(envio.getString("edo")+" "+envio.getString("cd")+"<br>"+envio.getInt("cp"));
-                    }
-                    out.print("</div>");
-                %>
-                <br>
-                <br>
-                <a href="ventas.jsp"><font color="#000000" >Regresar</font></a>
-                <%}else{%>
-                    <a href="productos.jsp"><font color="#000000" >Regresar</font></a>
-                <%}%>
+        <center>
+                <div class="content-wrapper">
+                    <div class="container form">
+                        <%
+                            Compra.next();
+                            comprador = Compra.getString("comprador");
+                            Producto producto = Sentencias.readProductoId(Compra.getInt("idProducto"));
+                            out.print("<h1 class='text-center'>Venta con No.Pedido " + Compra.getInt("noPedido") + " </h1><hr><br>");
+                        %>
+                        <div class="row">
+                            <div class="col-md-6">
+                                
+                                <table class="table">
+                                    
+                                    <tr class="thead-dark">
+                                        <th scope="col" class="thead-dark"><center>#</center></th>
+                                        <% out.print("<td><center> " + Compra.getInt("noPedido") + "</center></td>"); %>                                                                                                                        
+                                    </tr>                                              
+                                    <tr class="thead-dark">
+                                        <th scope="col" ><center>Fecha</center></th>
+                                        <% out.print("<td><center> " + Compra.getTimestamp("fecha") + "</center></td>"); %>
+                                    </tr>
+                                    
+                                    <tr class="thead-dark">
+                                        <th scope="col"><center>Comprador</center></th>
+                                        <% out.print("<td><center> " + Compra.getString("comprador") + "</center></td>"); %>                            
+                                    </tr>
+                                    <tr class="thead-dark">
+                                        <%if (priv.equals("A")) {
+                                            out.print("<th scope='col' ><center><br><br>Etiqueta de Envio</center></th>");                                        
+                                            out.print("<td><center><div class='etiqueta'>");
+                                                ResultSet envio = Sentencias.datosEnvio(comprador);
+                                                while (envio.next()) {
+                                                    out.print(envio.getString("np") + " " + envio.getString("ap") + " " + envio.getString("am") + "<br>");
+                                                    out.print(envio.getString("calle") + " " + envio.getInt("noExt") + " ");
+                                                    if (envio.getInt("noInt") != 0) {
+                                                        out.print(envio.getInt("noInt") + "<br>");
+                                                    } else {
+                                                        out.print("<br>");
+                                                    }
+                                                    out.print(envio.getString("alc") + "<br>" + envio.getString("col") + "<br>");
+                                                    out.print(envio.getString("edo") + " " + envio.getString("cd") + "<br>" + envio.getInt("cp"));
+                                                }
+                                                out.print("</div></center></td>");
+                                        }%>
+                                    </tr>                                                                     
+                                </table> 
+                            </div>
+                            
+                            <div class="col-md-5">
+                                <br><br><br>
+                                <%
+                                    out.print("<img class='img-div img-fluid rounded d-block m-l2-none' src='assets/icons/logo.png'>");
+                                %>  
+                            </div>
+                            <div class="col-md-1">                                
+                            </div>
+                        </div>
+                            <br>             
+                            <h2>Productos</h2>
+                            <div class="row">                                
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8 ">
+                                    
+                                        <div class="card products-cards">                                        
+                                            <div class="card-body">
+                                                <div class="row">                                                    
+                                                    <div class="col-md-12 ">                                                        
+                                                        <table class="table">
+                                                            <thead class="thead-dark">
+                                                                <th>Imagen</th>
+                                                                <th>Nombre</th>
+                                                                <th>Precio</th>
+                                                                <th>Cantidad</th>
+                                                                <th>Subtotal</th>
+                                                                <th></th>
+                                                                
+                                                            </thead>
+                                                            <% float suma=0.0f;
+                                                                do { 
+                                                                producto = Sentencias.readProductoId(Compra.getInt("idProducto"));                                                                
+                                                                suma+=producto.getPrecio();
+                                                            %>
+                                                                <tr class="thead-dark">      
+                                                                    <td><% out.print("<img class='img-div img-fluid rounded d-block m-l2-none' src='data:image/jpg;base64," + producto.getFoto() + "'>"); %>  </td>
+                                                                    <% out.print("<td><center> " + Compra.getString("nomProducto") + "</center></td>"); %>
+                                                                    <% out.print("<td><center> " + producto.getPrecio() + "</center></td>"); %>
+                                                                    <% out.print("<td><center> " + Compra.getInt("cantidadProdcuto") + "</center></td>"); %>
+                                                                    <% out.print("<td><center> " + Compra.getInt("cantidadProdcuto")*producto.getPrecio() + "</center></td>"); %>                                                                
+                                                                    <td><center><% out.print("<a href='detalles.jsp?sku="+producto.getId()+"' class='btn btn-dark'>Ver</a>"); %></center></td>
+                                                                </tr>
+                                                            <% } while (Compra.next()); %>                                                                                                                         
+                                                            <tr>
+                                                                <td><center></center></td>
+                                                                <td><center></center></td>
+                                                                <td><center></center></td>
+                                                                <td><center>Total: </center></td>
+                                                                <td><center><%out.print(suma);%></center></td>
+                                                                <td><center></center></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>                                            
+                                                </div>                                            
+                                            </div>
+                                        </div>
+                                    
+                                </div>
+                                <div class="col-md-2"></div>
+                        </div>                            
+                        <br>                        
+                        <% if (priv.equals("A")) { %>                                
+                            <a href="ventas.jsp"><button type='button' class='btn btn-dark btn-lg'>Regresar</button></a>
+                        <%} else {%>
+                            <a href="productos.jsp"><font color="#000000" >Regresar</font></a>
+                        <%}%>
+                </div>
             </div>
         </center>
     </body>

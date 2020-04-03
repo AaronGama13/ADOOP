@@ -44,5 +44,14 @@ nav{
 }
 
 html{
-    max-height: 50px;
+    max-height: 50px;    
+}
+
+.vertical-center{
+    margin-top: 50%;
+}
+
+.products-cards{
+    margin-top:  3%;
+    box-sizing: border-box;
 }
