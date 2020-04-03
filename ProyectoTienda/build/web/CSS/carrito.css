@@ -63,11 +63,11 @@ hr{
 }
 #subtotal{
 	padding: 25px 10px 25px 10px;
-	background-color: #F24452;
+	background-color: #1F1A40;
 	color: white;
 	width: 27%;
 	position: relative;
-	border-radius: 4px;
+	border-radius: 20px;
 	box-shadow: 5px 0px 10px gray;
 }
 #tu-carrito{
@@ -115,7 +115,7 @@ hr{
 	font-size: 20px;
 	width: 18%;
 	text-align: right;
-	color: #F22973;
+	color: #d500f9;
 	font-weight: bold;
 }
 #imagen{		

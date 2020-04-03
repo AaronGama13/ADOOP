@@ -24,12 +24,12 @@
 <html>
     <head>
         <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Catálogo de productos</title>
-            <link rel="stylesheet" href="CSS/catalogo.css" type="text/css">
-            <link rel="stylesheet" href="CSS/universal.css" type="text/css">
-            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">             
-            <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ventas</title>
+        <link rel="stylesheet" href="CSS/catalogo.css" type="text/css">
+        <link rel="stylesheet" href="CSS/universal.css" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">             
+        <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
@@ -40,88 +40,33 @@
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Comprador</th>
-                                <th scope="col"></th>
+                                <th scope="col"><center>#</center></th>
+                                <th scope="col"><center>Fecha</center></th>
+                                <th scope="col"><center>Comprador</center></th>
+                                <th scope="col"><center>Ver</center></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <table class="table">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <table>
-                        <tr>
-                            <td width='50'><center>noPedido</center></td>
-                        <td width='200'><center>Fecha</center></td>
-                        <td width='150'><center>Comprador</center></td>
-                        <td width='70'><center>&nbsp</center></td>
-                        </tr>
-                        <%
-                            try {
-                                int k = 1;
-                                ResultSet rs = Sentencias.Ventas();
-                                while (rs.next()) {
-                                    out.print("<tr>");
-                                    out.print("<td><center> " + rs.getInt("noPedido") + " </center></td>");
-                                    out.print("<td><center> " + rs.getTimestamp("fecha") + " </center></td>");
-                                    out.print("<td><center> " + rs.getString("comprador") + " </center></td>");
-                                    out.print("<td><center><a href='ServletVentas?accion=mostrar&id=" + rs.getInt("noPedido") + "'><button class='add_cart'>Mostrar</button></a></center></td>");
-                                    out.print("</tr>");
+                        <tbody>                            
+                            <%
+                                try {
+                                    int k = 1;
+                                    ResultSet rs = Sentencias.Ventas();
+                                    while (rs.next()) {
+                                        out.print("<tr>");
+                                        out.print("<th scope='row' ><center> " + rs.getInt("noPedido") + " </center></th>");
+                                        out.print("<td><center> " + rs.getTimestamp("fecha") + " </center></td>");
+                                        out.print("<td><center> " + rs.getString("comprador") + " </center></td>");
+                                        out.print("<td><center><a href='ServletVentas?accion=mostrar&id=" + rs.getInt("noPedido") + "'>"
+                                                + "<button type='button' class='btn btn-dark'>Mostrar</button></a></center></td>");
+                                        out.print("</tr>");
+                                    }
+                                } catch (Exception e) {
                                 }
-                            } catch (Exception e) {
-                            }
-                        %>
-                    </table>
+                            %>
+                        </tbody>
+                    </table>                    
+                    
+                    
                 </div>
             </div>
         </center>         

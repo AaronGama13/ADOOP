@@ -17,27 +17,23 @@
     ResultSet Compra = (ResultSet) sesionOK.getAttribute("rs");
     if(sesionOK.getAttribute("usuario") == null){
         response.sendRedirect("index.jsp");
-    }else{
-        //out.print(username);                    
     }
     %>
     
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="CSS/universal.css">
-        <link rel="stylesheet" href="CSS/detalles.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Detalle de la venta</title>
+        <link rel="stylesheet" href="CSS/catalogo.css" type="text/css">
+        <link rel="stylesheet" href="CSS/universal.css" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">             
+        <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
     </head>
     <body>
-        <center>
-            <header>
-                <a href="productos.jsp">Bienvenido a LINIO MX feiq</a>
-                <a href="carrito.jsp"><img class='view_cart' src="IMG/cart.jpg" width="50" height="50"></a>
-                <a href="ajustes.jsp"><img class='view_cart' src="IMG/user.jpg" width="50" height="50"></a>
-            </header>
-
+        <jsp:include page="navbar.jsp" />
+        <center>            
             <div>
                 <%
                 Compra.next();
