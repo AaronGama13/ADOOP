@@ -103,7 +103,7 @@ public class ServletCarrito extends HttpServlet {
             Date fechaActual =  formateador.parse(aux2);
             
             
-            String sNum =  request.getParameter("NumTarjeta");
+            String sNum =  request.getParameter("NumTarjeta");            
             sNum = sNum.replace(" ","");
             if(sNum.length() != 16){
                 sesion.setAttribute("Validar", "Tarjeta no valida");

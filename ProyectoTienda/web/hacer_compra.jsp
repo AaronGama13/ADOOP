@@ -17,6 +17,7 @@
 <%
     //COMPROBAMOS QUE NO EXISTA UNA SESIÓN INICIADA PREVIAMENTE    
     HttpSession sesionOK = request.getSession();   
+    sesionOK.setAttribute("Tarjeta","VISA");
     String username = "";
     String priv = "";
     String msj = "";
@@ -43,9 +44,10 @@
                             <button name="VISA" id="VISA" class="visible"> VISA</button>
                         </a>
                     <span>Ingrese los datos de su tarjeta de crédito</span>
-                    <input type="text" name="nom-tarjeta" placeholder="Nombre en la tarjeta" id="nom-tarjeta">
-                    <input type="number" name="num-tarjeta" placeholder="Número de la tarjeta"
+                    <input type="text" name="NomTarjeta" placeholder="Nombre en la tarjeta" id="nom-tarjeta">
+                    <input type="text" name="NumTarjeta" placeholder="Número de la tarjeta"
                            id="num-tarjeta">
+                    <input type="date" name="FechTarjeta">
                     <select id="mes">
                         <option value="MM" selected="">MM</option>
                         <%for(int i = 1; i <= 12; i++){  

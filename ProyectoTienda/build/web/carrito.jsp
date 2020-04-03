@@ -16,6 +16,7 @@
 <%
     //COMPROBAMOS QUE NO EXISTA UNA SESIÓN INICIADA PREVIAMENTE    
     HttpSession sesionOK = request.getSession();   
+    
     String username = null ,priv = null;
     ArrayList<Producto> Carrito = null;
     String Tarjeta = "";
@@ -34,6 +35,7 @@
         response.sendRedirect("productos.jsp");
         out.print("<script type='text/javascript'>alert('No tienes permiso para entrar al carrito');</script>");
     }
+    
     %>
 
 <!DOCTYPE html>
@@ -138,7 +140,7 @@
 			</div>
 			<div id="pagar">
 				<form>
-                                        <a href="hacer_compra.jsp" id="btn-pagar">Pagar</a>
+                                        <a href="hacer_compra.jsp" id="btn-pagar">Pagar</a>                                        
 					<!--<input type="submit" name="pagar" id="btn-pagar" value="pagar">-->
                                         <input type="submit" name="vaciar" id="btn-vaciar" value="Vaciar carrito">
 				</form>
