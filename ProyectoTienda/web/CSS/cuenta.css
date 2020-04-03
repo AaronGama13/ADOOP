@@ -1,0 +1,45 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2/04/2020, 03:50:47 PM
+    Author     : saulg
+*/
+.clearfix{
+    float: none;
+    clear: both;
+}
+#contenedor{
+    margin: 0px auto;
+    width: 70%;
+    margin-top: 20px;
+    padding: 2px;
+}
+#contenedor #con-header{
+    padding: 5px;
+    width: 100%;
+    text-align: center;    
+    text-transform: uppercase;
+    border-bottom: 1px solid gray;
+}
+#contenedor #con-info{
+    width: 100%;
+    padding: 20px 150px 20px 150px;
+}
+#contenedor #con-info input[type="text"],
+input[type="number"]{
+    width: 100%;
+    padding: 10px;
+}
+#tel, #cp, #pass, #new-pass{
+    width: 100%;
+    padding: 10px;
+}
+#guardar{
+    width: 30%;
+    padding: 10px 20px 10px 20px;
+    margin: 0px auto;
+    float: right;
+}
