@@ -13,7 +13,7 @@ and open the template in the editor.
 
 html {
   overflow-y: scroll;
-  background: #ade79a;
+  background: #FFF;
   
 }
 
@@ -24,18 +24,18 @@ html {
 
 a {
   text-decoration: none;
-  color: #286090;
+  color: white;
   -webkit-transition: .5s ease;
   transition: .5s ease;
 }
 a:hover {
   color: #921e12;
-  -webkit-transform: scale(1.5);
+  -webkit-transform: scale(1.05);
     -webkit-transition: all 1s ease;
-    -moz-transform: scale(1.5);
-    -o-transform: sclae(1.5);
-    -ms-transform: scale(1.5);
-    transform: scale(1.5);
+    -moz-transform: scale(1.05);
+    -o-transform: sclae(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
 }
 img:hover{
     -webkit-transform: scale(1.5);
@@ -64,7 +64,7 @@ img:hover{
 }
 
 .form {
-  background: rgba(19, 35, 47, 0.9);
+  background: rgba(225, 255, 255, 0.5);
   padding: 40px;
   max-width: 600px;
   margin: 40px auto;
@@ -86,8 +86,8 @@ img:hover{
   display: block;
   text-decoration: none;
   padding: 15px;
-  background: rgba(160, 179, 176, 0.25);
-  color: #a0b3b0;
+  background: #eee;
+  color: #F22973;
   font-size: 20px;
   float: left;
   width: 50%;
@@ -97,12 +97,12 @@ img:hover{
   transition: .5s ease;
 }
 .tab-group li a:hover {
-  background: #ade79a;
+  background: #F22973;
   color: #ffffff;  
   border: 1px solid white;
 }
 .tab-group .active a {
-  background: #ade79a;
+  background: #F24452;
   color: #ffffff;
 }
 
@@ -112,7 +112,7 @@ img:hover{
 
 h1 {
   text-align: center;
-  color: #ffffff;
+  color: #212529;
   font-weight: 300;
   margin: 0 0 40px;
 }
@@ -122,7 +122,7 @@ label {
   -webkit-transform: translateY(6px);
           transform: translateY(6px);
   left: 13px;
-  color: rgba(255, 255, 255, 0.5);
+  color: gray;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
   -webkit-backface-visibility: hidden;
@@ -131,7 +131,7 @@ label {
 }
 label .req {
   margin: 2px;
-  color: #ade79a;
+  color: gray;
 }
 
 label.active {
@@ -145,7 +145,7 @@ label.active .req {
 }
 
 label.highlight {
-  color: #ffffff;
+  color: gray;
 }
 
 input, textarea {
@@ -156,15 +156,15 @@ input, textarea {
   padding: 5px 10px;
   background: none;
   background-image: none;
-  border: 1px solid #a0b3b0;
-  color: #ffffff;
+  border: 1px solid #eee;
+  color: #000;
   border-radius: 0;
   -webkit-transition: border-color .25s ease, box-shadow .25s ease;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
 input:focus, textarea:focus {
   outline: 0;
-  border-color: #ade79a;
+  box-shadow: 0px 0px 3px #392359;
 }
 
 textarea {
@@ -200,14 +200,14 @@ textarea {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background: #ade79a;
+  background: #F24452;
   color: #ffffff;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   -webkit-appearance: none;
 }
 .button:hover, .button:focus {
-  background: #ade79a;
+  box-shadow: 0px 0px 4px #ccc;
   
 }
 
@@ -220,4 +220,3 @@ textarea {
   margin-top: -20px;
   text-align: right;
 }
-
