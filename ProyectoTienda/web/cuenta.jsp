@@ -41,20 +41,25 @@
                 <p>Puedes modificar los datos de tu cuenta</p>
             </header>
             <div id="con-info">
-                <span>Información básica:</span>
-                <p><input type="text" name="nombre" readonly value="Saúl"></p>
+                <p><span>Información básica:</span></p>
                 <p>
-                    <input type="text" name="ap" id="readonly" readonly value="García">
-                    <input type="text" name="am" id="readonly" readonly value="Medina">
-                </p><hr>
-                <form id="info-basica">
-                    <span>Personal</span>
-                    <p><input type="text" name="calle" id="calle" value="Gabriela"></p>
-                    <p><input type="text" name="col" id="col" value="Villa Centroamericana"></p>
-                    <p><input type="text" name="alc" id="alc" value="Tláhuac"></p>
-                    <p><input type="number" name="cp" id="cp" value="13278"></p>
-                    <p><input type="text" name="ciudad" id="ciudad" value="CDMX"></p>
-                    <p><input type="number" name="tel" id="tel" value="5539623586"></p>  
+                    <input type="text" name="nombre" class="readonly" readonly value='Saúl'>
+                    <input type="text" name="ap" class="readonly" readonly value='García'>
+                    <input type="text" name="am" class="readonly" readonly value='Medina'>
+                </p>
+                <form id="info-basica">                    
+                    <span class="titles">Calle</span>
+                    <p><input type="text" name="calle" id="calle" value='Gabriela'></p>
+                    <span class="titles">Colonia</span>
+                    <p><input type="text" name="col" id="col" value='Villa Centroamericana'></p>
+                    <span class="titles">Alcaldía</span>
+                    <p><input type="text" name="alc" id="alc" value='Tláhuac'></p>
+                    <span class="titles">Código Postal</span>
+                    <p><input type="number" name="cp" id="cp" value='13278'></p>
+                    <span class="titles">Ciudad</span>
+                    <p><input type="text" name="ciudad" id="ciudad" value='CDMX'></p>
+                    <span class="titles">Teléfono</span>
+                    <p><input type="number" name="tel" id="tel" value='5539623586'></p>                      
                     <p><input type="submit" name="Guardar" id="guardar" value="Guardar"></p>
                     <div class="clearfix"></div><hr>
                 </form>

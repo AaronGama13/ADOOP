@@ -21,7 +21,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Inicia sesión</title>
         <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="CSS/normalize.min.css">
         <link rel="stylesheet" href="CSS/style2.css">
