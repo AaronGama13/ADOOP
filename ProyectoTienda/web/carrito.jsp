@@ -21,6 +21,7 @@
     ArrayList<Producto> Carrito = null;
     String Tarjeta = "";
     String Validar = "";
+    Double total = 0.0;
     int [][] Cantidad = new int[100][2];
     if(sesionOK.getAttribute("usuario")!=null){
         username = (String) sesionOK.getAttribute("usuario");
@@ -97,13 +98,15 @@
                                         out.print("</div>");
                                         out.print("</li>");
                                         out.print("<div class='clearfix'></div>");
-                                        out.print("</div><hr>");                                        
+                                        out.print("</div><hr>");
+                                        total = total + (p.getPrecio()*Cantidad[k][1]);
                                         break;
                                         }
                                     }
                                     out.print("</ul>");
                                     k++;
                                 }
+                                sesionOK.setAttribute("total",total);
                             }catch(Exception e){
                                 System.out.println("Error perro " + e);
                             }
@@ -136,7 +139,7 @@
 			</div>
 			<div id="total">
 				<span>Total a pagar</span><br>
-				<span>$40,000</span>
+				<span>$<%out.print(total);%>mxn</span>
 			</div>
 			<div id="pagar">
 				<form>

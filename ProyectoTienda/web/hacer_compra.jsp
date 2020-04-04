@@ -4,6 +4,7 @@
     Author     : saulg
 --%>
 
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.Base64"%>
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.sql.Blob"%>
@@ -17,12 +18,24 @@
 <%
     //COMPROBAMOS QUE NO EXISTA UNA SESIÓN INICIADA PREVIAMENTE    
     HttpSession sesionOK = request.getSession();   
-    sesionOK.setAttribute("Tarjeta","VISA");
     String username = "";
+    String Tarjeta = "";
     String priv = "";
     String msj = "";
+    Double total = 0.0, descuento = 0.0;    
     ArrayList<Producto> Carrito = new ArrayList<Producto>();
     int[][] Cantidad = new int[100][2];
+    int mes = Calendar.getInstance().get(Calendar.MONTH);
+    int ano = Calendar.getInstance().get(Calendar.YEAR);
+    if(sesionOK.getAttribute("usuario")!=null){
+        username = (String) sesionOK.getAttribute("usuario");
+        priv = (String) sesionOK.getAttribute("priv");
+        Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
+        Tarjeta = (String) sesionOK.getAttribute("Tarjeta");
+        //Validar = (String) sesionOK.getAttribute("Validar");
+        Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");
+        total = (Double) sesionOK.getAttribute("total");
+    }
     %>
 
 <!DOCTYPE html>
@@ -73,11 +86,18 @@
             <div id="resumen">
                 <h4>Resumen</h4>
                 <span>Precio original</span>
-                <span class="span-precio">$1000</span>
+                    <%out.print("<span class='span-precio'>$"+String.valueOf(total)+"</span>");%>
                 <span>Descuento</span>
-                <span class="span-precio">-$100</span><hr>
+                    <%
+                        if(total>2000.0||Sentencias.acreedorDscto(username,mes+1,ano)){
+                            descuento = total*0.1;
+                            out.print("<span class='span-precio'>-$"+String.valueOf(descuento)+"mxn</span><hr>");
+                        }else{
+                            out.print("<span class='span-precio'>-$0.00</span><hr>");
+                        }
+                    %>
                 <span id="total">Total</span>
-                <span class="span-precio" id="precio-total">$900</span>
+                <span class="span-precio" id="precio-total">$<%out.print(String.valueOf(total-descuento));%>mxn</span>
             </div> 
         </section>
     </body>
