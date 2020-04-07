@@ -4,11 +4,11 @@ nav{
 }
 
 .profile, .cart{
-	margin: 10px;
-	float: right;
-	width: 1.5em;
-	height: 1.5em;
-	border-radius: 50%;
+    margin: 10px;
+    
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
 }
 
 .logo{
@@ -54,4 +54,8 @@ html{
 .products-cards{
     margin-top:  3%;
     box-sizing: border-box;
+}
+
+.dropdown-menu-margin{
+    margin: 3em;
 }
