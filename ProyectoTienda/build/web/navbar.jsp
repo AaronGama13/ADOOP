@@ -30,19 +30,14 @@
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Catálogo de productos</title>            
-            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">            
             <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
             <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-            
-            <link rel="stylesheet" type="text/css" href="CSS/carrito.css">
-        <link rel="stylesheet" type="text/css" href="CSS/universal.css">
-	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
-        <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="CSS/detalles.css">
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>           
+            <link rel="stylesheet" type="text/css" href="CSS/universal.css">
+            <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+            <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css" href="CSS/detalles.css">
     </head>
-    
         <%
             if (sesionOK.getAttribute("usuario") != null) {
                 username = (String) sesionOK.getAttribute("usuario");
@@ -67,12 +62,12 @@
                             <div class="dropdown">                                
                                 
                                     <button class="btn btn-default dropdown-toggle text-white" type="button" id="menu1" data-toggle="dropdown">
-                                        <% out.print(username); %>
                                         <img src='assets/icons/profile.png' class='profile'>
+                                        <% out.print(username); %>
                                         <span class="caret"></span>
                                     </button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href='password.jsp'>Cambiar contraseña</a></li>
+                                <ul class="dropdown-menu dropdown-menu-right dropdown-menu-margin">
+                                    <li><%out.print("<a href='ServletLoguin?username="+username+"&pass=X&accion=cerrar'>Cerrar sesión</a>");%></li>
                                     <li><a href="cuenta.jsp">Cuenta</a></li>
                                 </ul>
                             </div>                                                                                     
@@ -97,13 +92,13 @@
                                 </li>
                             </ul>                                      
                             <div class="dropdown">                                                                
-                                    <button class="btn btn-default dropdown-toggle text-white" type="button" id="menu1" data-toggle="dropdown">
-                                        <% out.print(username); %>
-                                        <img src='assets/icons/profile.png' class='profile'>
-                                        <span class="caret"></span>
-                                    </button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href='password.jsp'>Cambiar contraseña</a></li>
+                                <button class="btn btn-default dropdown-toggle text-white" type="button" id="menu1" data-toggle="dropdown">
+                                    <img src='assets/icons/profile.png' class='profile'>
+                                    <% out.print(username); %>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right dropdown-menu-margin">
+                                    <li><%out.print("<a href='ServletLoguin?username="+username+"&pass=X&accion=cerrar'>Cerrar sesión</a>");%></li>
                                     <li><a href="cuenta.jsp">Cuenta</a></li>
                                 </ul>
                             </div>                                                                                     
@@ -122,10 +117,8 @@
                                 </li>                          
                             </ul>                
                             <a class='nav-link products-link' href='index.jsp'>Registrarse / Iniciar sesión</a>                
-
                         </div>
                     </nav>
-
                 <%}
             }else{ 
         %>            
@@ -140,7 +133,6 @@
                             </li>                          
                         </ul>                
                         <a class='nav-link products-link' href='index.jsp'>Registrarse / Iniciar sesión</a>                
-
                     </div>
                 </nav>	
         <%  } 
