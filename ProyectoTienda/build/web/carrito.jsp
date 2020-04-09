@@ -19,16 +19,12 @@
     
     String username = null ,priv = null;
     ArrayList<Producto> Carrito = null;
-    String Tarjeta = "";
-    String Validar = "";
     Double total = 0.0;
     int [][] Cantidad = new int[100][2];
     if(sesionOK.getAttribute("usuario")!=null){
         username = (String) sesionOK.getAttribute("usuario");
         priv = (String) sesionOK.getAttribute("priv");
         Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
-        Tarjeta = (String) sesionOK.getAttribute("Tarjeta");
-        Validar = (String) sesionOK.getAttribute("Validar");
         Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");
     }
     

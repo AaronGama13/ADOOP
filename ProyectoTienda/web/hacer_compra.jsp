@@ -49,20 +49,24 @@
     </head>
     <body>
         <jsp:include page="navbar.jsp"/>
+        <%
+            System.out.println(Tarjeta);
+        %>
         <section id="contenedor">
-            <div id="detalles">
-                <h4>Pagar</h4>          
-                <form action="ServletCarrito?accion=tarjeta&id=0" method="POST">
-                    <a href='ServletCarrito?accion=Tarjeta&id=0'>
-                            <button name="VISA" id="VISA" class="visible"> VISA</button>
-                        </a>
+                <div id="detalles">
+                    <h4>Pagar</h4>          
+                    <span>Seleccione su tipo de tarjeta</span><br/>
+                    <%
+                        out.print("<a href='ServletCarrito?id=0&accion=Tarjeta'><button id='btn_visa'>Visa</button></a>");
+                        out.print("<a href='ServletCarrito?id=1&accion=Tarjeta'><button id='btn_mast'>Mastercard</button></a>");
+                    %>
+                    <br/>
+                    <form action="ServletCarrito" method="POST">
                     <span>Ingrese los datos de su tarjeta de crédito</span>
                     <input type="text" name="NomTarjeta" placeholder="Nombre en la tarjeta" id="nom-tarjeta">
-                    <input type="text" name="NumTarjeta" placeholder="Número de la tarjeta"
-                           id="num-tarjeta">
-                    <input type="date" name="FechTarjeta">
-                    <select id="mes">
-                        <option value="MM" selected="">MM</option>
+                    <input type="text" name="NumTarjeta" placeholder="Número de la tarjeta" id="num-tarjeta">
+                    <select id="mes" name="mes">
+                        <option value="MM">MM</option>
                         <%for(int i = 1; i <= 12; i++){  
                             if(i < 10){
                                 out.print("<option value='0"+ i +"'>0"+ i +"</option>");
@@ -71,34 +75,36 @@
                             }
                         }%>                        
                     </select>
-                    <select id="anio">
+                    <select id="anio" name="anio">
                         <option value="AAAA" selected>AAAA</option>
                         <%for(int i = 2020; i <= 2040; i++){  
                             out.print("<option value='"+ i +"'>"+ i +"</option>");
                         }%>
                     </select>
-                    <input type="number" id="cvc" placeholder="CVC"><br>   
+                    <input type="number" id="cvc" placeholder="CVC" minlength="3" maxlength="3" min="0" max="999"><br>   
                     <div class="clearfix"></div>
                     <input type="submit" id="comprar" value="Realizar pago" name="comprar">
-                    <div class="clearfix"></div>
-                </form>                                    
-            </div>                 
-            <div id="resumen">
-                <h4>Resumen</h4>
-                <span>Precio original</span>
-                    <%out.print("<span class='span-precio'>$"+String.valueOf(total)+"</span>");%>
-                <span>Descuento</span>
+                    <div class="clearfix"></div>                                    
+                </div>                 
+                <div id="resumen">
+                    <h4>Resumen</h4>
+                    <span>Precio original</span>
+                        <%out.print("<span class='span-precio'>$"+String.valueOf(total)+"</span>");%>
+                    <span>Descuento</span>
                     <%
                         if(total>2000.0||Sentencias.acreedorDscto(username,mes+1,ano)){
                             descuento = total*0.1;
+                            out.print("<input type='hidden' name='descuento' value='1'>");
                             out.print("<span class='span-precio'>-$"+String.valueOf(descuento)+"mxn</span><hr>");
                         }else{
+                            out.print("<input type='hidden' name='descuento' value='0'>");
                             out.print("<span class='span-precio'>-$0.00</span><hr>");
                         }
                     %>
-                <span id="total">Total</span>
-                <span class="span-precio" id="precio-total">$<%out.print(String.valueOf(total-descuento));%>mxn</span>
-            </div> 
+                    <span id="total">Total</span>
+                    <span class="span-precio" id="precio-total">$<%out.print(String.valueOf(total-descuento));%>mxn</span>
+                </div> 
+            </form>
         </section>
     </body>
 </html>
