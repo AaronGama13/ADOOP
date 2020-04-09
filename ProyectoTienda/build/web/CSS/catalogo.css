@@ -1,20 +1,19 @@
 .container{
-	width: 100%;
+    width: 100%;
 }
 
 .products{
-	margin-bottom: 40px;
-	margin-left: 30px;
-	padding-botton: 30px;
+    margin-bottom: 40px;
+    margin-left: 30px;
+    padding-botton: 30px;
 }
 
 .menu-overlay{
     position: absolute;
-    width: 14.5%;
+    width: 15%;
     height: 10em;
     margin-left: 43%;
-    margin-top: 15em;
-    
+    margin-top: 15em;   
 }
 
 .filter-menu{
@@ -32,7 +31,7 @@
     margin-top: 4px;   
     color: white;
     text-align: center;
-    margin-left: 6px;
+    margin-left: 1em;
     margin-top: 5px;
     margin-bottom: 1px;
     font-family: 'Roboto', sans-serif;

@@ -18,15 +18,21 @@ nav{
 }
 
 .products-link {
-	font-family: 'Roboto', sans-serif;
-	color: white;
-	vertical-align: middle;
-	margin-left: 2em;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    vertical-align: middle;
+    margin-left: 2em;
 }
 
 .products-link:hover{
-	animation: glow 1s ease-in-out infinite alternate;
-	color: white;
+    animation: glow 1s ease-in-out infinite alternate;
+    color: white;
+}
+
+.products-link img{
+    margin-top: 5px;
+    margin-left: -2em;
+    margin-bottom: 2px;
 }
 
 .green-bg{  

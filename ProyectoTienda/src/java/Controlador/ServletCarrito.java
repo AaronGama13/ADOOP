@@ -66,11 +66,13 @@ public class ServletCarrito extends HttpServlet {
             else if(accion.equals("Tarjeta")){
                 if(idProducto == 0){
                     sesion.setAttribute("Tarjeta", "VISA");
-                    response.sendRedirect("carrito.jsp");
+                    System.out.println("ES UNA VISA");
+                    response.sendRedirect("hacer_compra.jsp");
                 }                    
                 else if(idProducto == 1){
+                    System.out.println("ES UNA MASTERCARD");
                     sesion.setAttribute("Tarjeta", "Mastercard");
-                    response.sendRedirect("carrito.jsp");
+                    response.sendRedirect("hacer_compra.jsp");
                 }
             }
         } catch(Exception e){
@@ -85,57 +87,53 @@ public class ServletCarrito extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession sesion = request.getSession();
             String username = (String) sesion.getAttribute("usuario");
+            int dcto = Integer.parseInt(request.getParameter("descuento"));
             ArrayList<Producto> Carrito = (ArrayList<Producto>) sesion.getAttribute("Carrito");
             String Tarjeta = (String) sesion.getAttribute("Tarjeta");
             if(Carrito == null || Carrito.isEmpty()){
-                sesion.setAttribute("Validar", "Seleccione un producto a comprar");
-                response.sendRedirect("carrito.jsp");
+                response.sendRedirect("carrito.jsp?msj=Selecciona%20al%20menos%20un%20producto%20para%20comprar");
                 return;
             }
             else if(Tarjeta.equals("")){
-                sesion.setAttribute("Validar", "Seleccione el tipo de tarjeta");
-                response.sendRedirect("carrito.jsp");
+                response.sendRedirect("hacer_compra.jsp?msj=Seleccione%20el%20tipo%20de%20tarjeta");
                 return;
             }
+            
+            String anio = request.getParameter("anio");
+            String mes = request.getParameter("mes");
             SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-DD");
-            Date sFech =  formateador.parse(request.getParameter("FechTarjeta"));
+            Date sFech =  formateador.parse(anio+"-"+mes+"-01");
             String aux2 = formateador.format(new Date());
             Date fechaActual =  formateador.parse(aux2);
-            
-            
+
             String sNum =  request.getParameter("NumTarjeta");            
             sNum = sNum.replace(" ","");
             if(sNum.length() != 16){
-                sesion.setAttribute("Validar", "Tarjeta no valida");
-                response.sendRedirect("carrito.jsp");
+                response.sendRedirect("hacer_compra.jsp?msj=Tarjeta%20no%20valida");
                 return;
             }
             if(sFech.before(fechaActual)){
-                sesion.setAttribute("Validar", "Tarjeta Vencida");
-                response.sendRedirect("carrito.jsp");
+                response.sendRedirect("hacer_compra.jsp?msj=Tarjeta%20vencida");
                 return;
             }
             for(int i = 0; i < 16; i++){
                 if (!Character.isDigit(sNum.charAt(i))){
-                    sesion.setAttribute("Validar", "Tarjeta no valida");
-                    response.sendRedirect("carrito.jsp");
+                    response.sendRedirect("hacer_compra.jsp?msj=Tarjeta%20no%20valida");
                     return;
                 }
             }
             if(sNum.charAt(0) != '4' && Tarjeta.equals("VISA")){
-                sesion.setAttribute("Validar", "Tarjeta VISA no valida");
-                response.sendRedirect("carrito.jsp");
+                response.sendRedirect("hacer_compra.jsp?msj=Tarjeta%20VISA%20no%20valida");
                 return;
             }
             int aux = Integer.parseInt(Character.toString(sNum.charAt(0)) + Character.toString(sNum.charAt(1)));
             if(!(aux > 50 && aux < 56) && Tarjeta.equals("Mastercard")){
-                sesion.setAttribute("Validar", "Tarjeta Mastercard no valida");
-                response.sendRedirect("carrito.jsp");
+                response.sendRedirect("hacer_compra.jsp?msj=Tarjeta%20Mastercard%20no%20valida");
                 return;
             }
             //Ingresar valor a la tabla
             int[][] Cantidad = SacarCantidad(Carrito);
-            String msj = Sentencias.insertarCompra(username, Cantidad);
+            String msj = Sentencias.insertarCompra(username,Cantidad,dcto);
             //if(msj.equals("Compra realizada con éxito"))
             //    Carrito.clear();
             //sesion.setAttribute("msj", msj);
@@ -144,7 +142,7 @@ public class ServletCarrito extends HttpServlet {
             ResultSet Compra = Sentencias.NoVenta(Pedido);
             sesion.setAttribute("Carrito", null);
             sesion.setAttribute("Cantidad", null);
-            sesion.setAttribute("rs", Compra);
+            sesion.setAttribute("rs",Compra);
             response.sendRedirect("venta_detalles.jsp");
        }catch(Exception e){
             System.out.println("ERROR (Sentencias.readProductos): "+e);
@@ -154,8 +152,7 @@ public class ServletCarrito extends HttpServlet {
     
     public static int[][] SacarCantidad(ArrayList<Producto> Carrito){
         int[][] Cantidad = new int [100][2];
-        int k = 0;
-        
+        int k = 0; 
         ciclo:
         for(Producto p : Carrito){
             for(int i = 0; i < 100; i++){
@@ -173,8 +170,8 @@ public class ServletCarrito extends HttpServlet {
         }
         return Cantidad;
     }
-          
-
+    
+    
     @Override
     public String getServletInfo() {
         return "Short description";

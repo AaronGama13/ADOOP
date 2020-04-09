@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class Sentencias {
     
     private static final String INSERT_USER = "INSERT INTO usuario VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static final String INSERT_COMPRA = "INSERT INTO compra VALUES (?,?,?)";
+    private static final String INSERT_COMPRA = "INSERT INTO compra VALUES (?,?,?,?)";
     private static final String INSERT_PRODUCT_COMPRA = "INSERT INTO productocompra values (?,?,?,?)";
     private static final String SELECT_USERNAME = "SELECT * FROM usuario where username=? and  pass=?"
             + "and priv = 'a' or priv = 'u'";
@@ -243,7 +243,7 @@ public class Sentencias {
             return 10;
         }                
     }
-    public static String insertarCompra(String comprador, int[][] Cantidad){
+    public static String insertarCompra(String comprador, int[][] Cantidad,int dcto){
         //SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         String msj;   
@@ -255,6 +255,7 @@ public class Sentencias {
             ps.setInt(1, NoPedido);
             ps.setTimestamp(2, timestamp);
             ps.setString(3, comprador);
+            ps.setInt(4,dcto);
             ps.executeUpdate();
             msj = insertarProductoCompra(NoPedido, Cantidad);
         }catch(Exception e){
