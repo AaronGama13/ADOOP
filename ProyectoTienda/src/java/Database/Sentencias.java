@@ -37,6 +37,7 @@ public class Sentencias {
     private static final String SELECT_NOVENTAS = "SELECT * FROM compra natural join productocompra WHERE NoPedido = ?";
     private static final String SELECT_DESCUENTO = "SELECT COUNT(*) FROM compra WHERE fecha BETWEEN ? AND ? AND comprador=?";
     private static final String UPDATE_USER_PASSWORD = "UPDATE usuario SET pass=? WHERE username=?";
+    private static final String DELETE_PROD = "DELETE FROM producto WHERE idProducto=?";
     public static int createUsuario(String [] params){
         try{
             Connection cnx = Conexion.getConexion();
@@ -86,6 +87,21 @@ public class Sentencias {
             } catch (Exception e) {
               System.err.println("ERROR (Sentencias.autenticacion): "+e);
             }
+        }
+        return false;
+    }
+    
+    public static boolean eliminarProducto(int idProducto) {
+        PreparedStatement ps = null;
+        try{
+            ps = Conexion.getConexion().prepareStatement(DELETE_PROD);
+            ps.setInt(1, idProducto);
+            if(ps.executeUpdate()==1) {
+                return true;
+            }
+        } catch(SQLException e) {
+            System.out.println("Hubo un error en sentencias eliminarProducto " + e);
+            return false;
         }
         return false;
     }

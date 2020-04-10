@@ -90,6 +90,9 @@
                                 <li class="navbar-item">
                                     <a class="nav-link products-link" href="ventas.jsp">Ventas</a>                                    
                                 </li>
+                                <li class="navbar-item">
+                                    <a class="nav-link products-link" href="ver_usuarios.jsp">Usuarios</a>
+                                </li>
                             </ul>                                      
                             <div class="dropdown">                                                                
                                 <button class="btn btn-default dropdown-toggle text-white" type="button" id="menu1" data-toggle="dropdown">

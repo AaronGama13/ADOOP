@@ -35,6 +35,7 @@
             <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">             
             <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">          
     </head>
+    <%priv = (String) sesionOK.getAttribute("priv");%>
     <body>            
             <jsp:include page="navbar.jsp" />         
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -94,7 +95,8 @@
                     Conexion con = new Conexion();
                     Producto aux;
                     ArrayList<Producto> productos = Sentencias.readProductos(tipo);
-                    for (Producto p : productos) {
+                    for (Producto p : productos) {                        
+                        if(priv.equalsIgnoreCase("u")){
                         out.print("<div class='product-container'>");
                             out.print("<div class='product-img'>");                            
                                 out.print("<img class='img-div img-fluid rounded d-block m-l2-none' id='id_img' src='data:image/jpg;base64,"+p.getFoto()+"'>");
@@ -107,6 +109,20 @@
                                 out.print("$"+p.getPrecio()+" mxn");
                             out.print("</p>");
                         out.print("</div>");
+                        } else if(priv.equalsIgnoreCase("a")) {
+                            out.print("<div class='product-container'>");
+                            out.print("<div class='product-img'>");                            
+                                out.print("<img class='img-div img-fluid rounded d-block m-l2-none' id='id_img' src='data:image/jpg;base64,"+p.getFoto()+"'>");
+                                out.print("<div class='product-overlay'></div>");
+                                out.print("<div class='btn-add'><a href='ServletCarrito?accion=eliminar&id="+p.getId()+"' onclick=\"eliminar_carrito();\">Eliminar</a></div>");
+                                out.print("<div class='btn-details'><a href='detalles.jsp?sku="+p.getId()+"'>Ver detalles</a></div>");
+                            out.print("</div>");
+                            out.print("<p class='product-info'>");
+                                out.print("<b>"+p.getNombre()+"</b><br/>");
+                                out.print("$"+p.getPrecio()+" mxn");
+                            out.print("</p>");
+                        out.print("</div>");
+                        }
                     }
                     //if (priv.equals("A")) {
                       //  out.print("<div class='product-container'><h4>Añadir producto</h4><br><br><a href='aniadir_producto.jsp'><img src='IMG/add.png' width='80' height='80'></a></div>");
@@ -130,7 +146,9 @@
             function agregar_carrito(){
                 alert("Producto agregado al carrito de compras");
             }
-
+            function eliminar_carrito() {
+                alert("Se eiminó el producto del catálogo");
+            }
             <% if(!msj.equals("")) {%>
                 alert("Compra realizada con éxito");
             <%}%>

@@ -63,6 +63,14 @@ public class ServletCarrito extends HttpServlet {
                 sesion.setAttribute("Cantidad", Cantidad);
                 response.sendRedirect("carrito.jsp");
             }
+            else if(accion.equals("eliminar")) {
+                if(Sentencias.eliminarProducto(idProducto)){
+                    response.sendRedirect("productos.jsp");
+                } else {
+                    response.sendRedirect("productos.jsp");
+                    out.print("<script>alert('No se pudo eliminar el producto')</script>");
+                }
+            }
             else if(accion.equals("Tarjeta")){
                 if(idProducto == 0){
                     sesion.setAttribute("Tarjeta", "VISA");
