@@ -39,6 +39,8 @@ public class Sentencias {
     private static final String SELECT_DESCUENTO = "SELECT COUNT(*) FROM compra WHERE fecha BETWEEN ? AND ? AND comprador=?";
     private static final String UPDATE_USER_PASSWORD = "UPDATE usuario SET pass=? WHERE username=?";
     private static final String DELETE_PROD = "DELETE FROM producto WHERE idProducto=?";
+    public static final String DELETE_USUARIO = "DELETE FROM usuario WHERE username=?";
+    
     public static int createUsuario(String [] params){
         try{
             Connection cnx = Conexion.getConexion();
@@ -393,6 +395,7 @@ public class Sentencias {
                }
            }
         }catch(SQLException e){
+            System.out.println("ERROR (Sentencias.acreedorDscto): "+e);
             e.printStackTrace();
         }
         return false;
@@ -404,8 +407,23 @@ public class Sentencias {
             PreparedStatement ps = Conexion.getConexion().prepareStatement(SELECT_USUARIOS);
             rs = ps.executeQuery();
         }catch(Exception e){
+            System.out.println("ERROR (Sentencias.obtenerUsuarios): "+e);
             e.printStackTrace();
         }
         return rs;
+    }
+    
+    public static boolean borrarUsuarioAdmin(String username){
+        try{
+            PreparedStatement ps = Conexion.getConexion().prepareStatement(DELETE_USUARIO);
+            ps.setString(1,username);
+            if(ps.execute()){
+                return true;
+            }
+        }catch(Exception e){
+            System.out.println("ERROR (Sentencias.borrarUsuario): "+e);
+            e.printStackTrace();
+        }
+        return false;
     }
 }   

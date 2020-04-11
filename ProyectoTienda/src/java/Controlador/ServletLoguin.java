@@ -70,7 +70,7 @@ public class ServletLoguin extends HttpServlet {
             }
             
             else if(accion.equals("borrar")) {
-                if (username.isEmpty() || pass.isEmpty()) {
+                if (username.isEmpty()) {
                     request.setAttribute("msg", "Llena todos los campos");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {

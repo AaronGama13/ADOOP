@@ -22,6 +22,14 @@
     String msj = "";
     ArrayList<Producto> Carrito = new ArrayList<Producto>();
     int[][] Cantidad = new int[100][2];
+    if(sesionOK.getAttribute("usuario")!=null){
+        username = (String) sesionOK.getAttribute("usuario");
+        priv = (String) sesionOK.getAttribute("priv");
+        Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
+        Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");
+    }else{
+        priv = "U";
+    }
     %>
 
 <!DOCTYPE html>
@@ -35,7 +43,6 @@
             <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">             
             <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">          
     </head>
-    <%priv = (String) sesionOK.getAttribute("priv");%>
     <body>            
             <jsp:include page="navbar.jsp" />         
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">

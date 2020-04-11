@@ -17,6 +17,14 @@
         <link rel="stylesheet" type="text/css" href="CSS/ver_usuarios.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     </head>
+    <%
+        HttpSession sesionOK = request.getSession();
+        if(sesionOK.getAttribute("usuario")!=null){
+            if(!sesionOK.getAttribute("priv").toString().equalsIgnoreCase("A")){
+               response.sendRedirect("productos.jsp");
+            }
+        }
+    %>
     <body>
        <jsp:include page="navbar.jsp" />
        <section id="contenedor">
@@ -29,21 +37,20 @@
                        ResultSet usuarios = Sentencias.obtenerUsuarios();
                        while(usuarios.next()){
                            out.print("<li>");
-                               out.print("");
-                               out.print("");
+                            out.print("<form action='ServletBorrarUsu' method='post'>");
+                             out.print("<span name='nombre'>Nombre: "+usuarios.getString("np")+" "+usuarios.getString("ap")+" "
+                                     + ""+usuarios.getString("am")+"</span>");
+                             out.print("<input name='usuario' type='hidden' value='"+usuarios.getString("username")+"'>");
+                             out.print("<span name='usuario'>Nombre de usuario: "+usuarios.getString("username")+"</span>");
+                             out.print("<span name='direccion'>Dirección: "+usuarios.getString("calle")+", No. Ext."+usuarios.getInt("noExt")+
+                                     ", No. Int. "+usuarios.getInt("noInt")+", Col. "+usuarios.getString("col")+", Municipio"+usuarios.getString("muni")
+                                    +", Edo. "+usuarios.getString("edo")+", Ciudad "+usuarios.getString("cd")+", C.P. "+usuarios.getInt("cp")+"</span>");
+                             out.print("<span name='tel'>Teléfono: "+usuarios.getString("tel")+"</span>");
+                             out.print("<input type='submit' value='Eliminar usuario'>");
+                            out.print("</form>");
                            out.print("</li>");
                        }
                    %>
-                   <li>
-                       <form action="action" method="POST">
-                           <span name="nombre">Nombre completo</span>
-                           <span name="usuario">Nombre de usuario</span>
-                           <span name="direccion">Dirección</span>
-                           <span name="tel">Número de teléfono</span>
-                           <input type="submit" value="Eliminar usuario">
-                       </form>
-                       <div class="clearfix"></div>
-                   </li>   
                </ul>
            </div>     
            <div class="clearfix"></div>
