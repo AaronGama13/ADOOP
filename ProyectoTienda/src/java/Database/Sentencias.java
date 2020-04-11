@@ -34,6 +34,7 @@ public class Sentencias {
     private static final String UPDATE_PRODUCT_INFO = "UPDATE producto SET nom=?, precio=?, stock=?, detalles=? WHERE idProducto=?";
     private static final String MAX_NOPEDIDO = "SELECT MAX(noPedido) as max from productocompra";   
     private static final String SELECT_VENTAS = "SELECT * FROM compra";
+    private static final String SELECT_USUARIOS = "SELECT * FROM usuarios";
     private static final String SELECT_NOVENTAS = "SELECT * FROM compra natural join productocompra WHERE NoPedido = ?";
     private static final String SELECT_DESCUENTO = "SELECT COUNT(*) FROM compra WHERE fecha BETWEEN ? AND ? AND comprador=?";
     private static final String UPDATE_USER_PASSWORD = "UPDATE usuario SET pass=? WHERE username=?";
@@ -382,7 +383,6 @@ public class Sentencias {
     public static boolean acreedorDscto(String username, int month, int year){
         try{
            PreparedStatement ps = Conexion.getConexion().prepareStatement(SELECT_DESCUENTO);
-           System.out.println("Sentencia: "+SELECT_DESCUENTO+"\nMonth="+month+"\nMonth+1="+(month+1));
            ps.setString(1,year+"-"+month+"-01 00:00:00");
            ps.setString(2,year+"-"+(month+1)+"-01 00:00:00");
            ps.setString(3,username);
@@ -397,5 +397,15 @@ public class Sentencias {
         }
         return false;
     }
-
+    
+    public static ResultSet obtenerUsuarios(){
+        ResultSet rs = null;
+        try{
+            PreparedStatement ps = Conexion.getConexion().prepareStatement(SELECT_USUARIOS);
+            rs = ps.executeQuery();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }   

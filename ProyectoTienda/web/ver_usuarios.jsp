@@ -4,6 +4,8 @@
     Author     : saulg
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="Database.Sentencias"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,6 +25,15 @@
            </header>
            <div id="usuarios">
                <ul>
+                   <%
+                       ResultSet usuarios = Sentencias.obtenerUsuarios();
+                       while(usuarios.next()){
+                           out.print("<li>");
+                               out.print("");
+                               out.print("");
+                           out.print("</li>");
+                       }
+                   %>
                    <li>
                        <form action="action" method="POST">
                            <span name="nombre">Nombre completo</span>
@@ -33,46 +44,7 @@
                        </form>
                        <div class="clearfix"></div>
                    </li>   
-                   <li>
-                       <form action="action" method="POST">
-                           <span name="nombre">Nombre completo</span>
-                           <span name="usuario">Nombre de usuario</span>
-                           <span name="direccion">Dirección</span>
-                           <span name="tel">Número de teléfono</span>
-                           <input type="submit" value="Eliminar usuario">
-                       </form>
-                       <div class="clearfix"></div>
-                   </li> 
-                   <li>
-                       <form action="action" method="POST">
-                           <span name="nombre">Nombre completo</span>
-                           <span name="usuario">Nombre de usuario</span>
-                           <span name="direccion">Dirección</span>
-                           <span name="tel">Número de teléfono</span>
-                           <input type="submit" value="Eliminar usuario">
-                       </form>
-                       <div class="clearfix"></div>
-                   </li> 
-                   <li>
-                       <form action="action" method="POST">
-                           <span name="nombre">Nombre completo</span>
-                           <span name="usuario">Nombre de usuario</span>
-                           <span name="direccion">Dirección</span>
-                           <span name="tel">Número de teléfono</span>
-                           <input type="submit" value="Eliminar usuario">
-                       </form>
-                       <div class="clearfix"></div>
-                   </li> 
-                   <li>
-                       <form action="action" method="POST">
-                           <span name="nombre">Nombre completo</span>
-                           <span name="usuario">Nombre de usuario</span>
-                           <span name="direccion">Dirección</span>
-                           <span name="tel">Número de teléfono</span>
-                           <input type="submit" value="Eliminar usuario">
-                       </form>
-                       <div class="clearfix"></div>
-                   </li> 
+               </ul>
            </div>     
            <div class="clearfix"></div>
        </section>
