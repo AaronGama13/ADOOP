@@ -13,48 +13,51 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author saulg
+ * @author sistemas2
  */
-@WebServlet(name = "ServletRegistro", urlPatterns = {"/ServletRegistro"})
-public class ServletRegistro extends HttpServlet {   
+@WebServlet(name = "ServletCambioPassword", urlPatterns = {"/ServletCambioPassword"})
+public class ServletCambioPassword extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession sesionOK = request.getSession();
         try (PrintWriter out = response.getWriter()) {
             
             String [] params = new String[16];
             
-            params[0] = request.getParameter("username");
-            params[1] = "u";
-            params[2] = request.getParameter("np");
-            params[3] = request.getParameter("ap");
-            params[4] = request.getParameter("am");
-            params[5] = request.getParameter("calle");
-            params[6] = request.getParameter("noExt");
-            params[7] = request.getParameter("noInt");
-            params[8] = request.getParameter("col");
-            params[9] = request.getParameter("alc");
-            params[10] = request.getParameter("muni");
-            params[11] = request.getParameter("edo");
-            params[12] = request.getParameter("cd");
-            params[13] = request.getParameter("cp");
-            params[14] = request.getParameter("tel");
-            params[15] = request.getParameter("pass");
-            
-            if(Sentencias.createUsuario(params) == 1){
-                response.sendRedirect("index.jsp");
+            params[0] = request.getParameter("password");
+            params[1] = request.getParameter("passwordConfirm");
+            params[2] = (String) sesionOK.getAttribute("usuario");
+            if(params[0].compareTo(params[1]) != 0){
+                request.setAttribute("msg", "La contraseña no es igual");
+                request.getRequestDispatcher("password.jsp").forward(request, response);
+            }else{
+            if(Sentencias.updateUsuario(params) == 1){
+                response.sendRedirect("productos.jsp");
             } else {
-                request.setAttribute("msg", "No se pudieron registrar sus datos");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }                                    
+                request.setAttribute("msg", "No se pudo cambiar la contraseña");
+                request.getRequestDispatcher("password.jsp").forward(request, response);
+            }  
+                
+            }                                  
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

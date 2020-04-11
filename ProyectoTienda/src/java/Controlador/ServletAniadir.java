@@ -45,7 +45,8 @@ public class ServletAniadir extends HttpServlet {
             params[0] = request.getParameter("nom");
             params[1] = request.getParameter("precio");
             params[2] = request.getParameter("stock");
-            params[3] = request.getParameter("tipo");            
+            params[3] = request.getParameter("tipo");   
+            System.out.println(params[3]);
             Part part = request.getPart("foto");
             InputStream foto = part.getInputStream();
             params[4] = request.getParameter("detalles");

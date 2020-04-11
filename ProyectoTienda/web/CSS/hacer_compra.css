@@ -1,0 +1,89 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2/04/2020, 12:18:07 AM
+    Author     : saulg
+*/
+
+.clearfix{
+    clear: both;
+    float: none;
+}
+#contenedor{    
+    width: 80%;
+    margin: 70px 0px 0px 110px;
+}
+input[type="text"],
+input[type="number"],
+select{
+    box-shadow: 0px 0px 2px #ccc inset;
+    color: gray;
+    transition: all 300ms;
+}
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus{
+	box-shadow: 0px 0px 3px #ff33ec inset;
+        color: black;
+}
+#detalles{
+    width: 65%;
+}
+#detalles form {
+    border-radius: 4px;
+    background-color: #eee;
+    padding: 16px;
+    border: 1px solid #ccc;
+}
+#detalles form #nom-tarjeta, #num-tarjeta{
+    width: 100%;
+    padding: 11px 6px 11px 6px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+}
+#detalles form #mes, #anio, #cvc{
+    width: 30%;
+    padding: 11px 6px 11px 6px;
+    border: 1px solid #ccc;
+}
+#detalles form #cvc, #comprar {
+    float: right;
+}
+#resumen{
+    position: fixed;
+    border: 2px solid #eee;
+    border-radius: 4px;
+    box-shadow: 5px 0px 10px gray;
+    left: 62%;
+    bottom: 20%;
+    width: 25%;
+    padding: 40px 20px 40px 20px;
+}
+#resumen h4{
+    font-weight: bold;
+}
+#resumen .span-precio{
+    float: right;
+}
+#detalles form #comprar{
+    width: 30%;
+    padding: 10px 5px 10px 5px;
+    border: none;
+    background-color: #F24452;
+    color: white;
+    margin-top: 30px;
+    border-radius: 3px;
+}
+#detalles form #comprar:active {
+    box-shadow: 0px 0px 7px gray inset;
+    text-shadow: 0px 0px 1px #ccc;
+}
+#resumen hr{
+    border: 2px solid #eee;
+}
+#resumen #total, #precio-total{
+    color: #BF2A8B;
+}

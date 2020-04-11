@@ -17,52 +17,58 @@
     String priv = (String) sesionOK.getAttribute("priv");
     if(sesionOK.getAttribute("usuario") == null){
         response.sendRedirect("index.jsp");
-    }else{
-        //out.print(username);                    
     }
     %>
     
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="CSS/universal.css">
-        <link rel="stylesheet" href="CSS/detalles.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ventas</title>
+        <link rel="stylesheet" href="CSS/catalogo.css" type="text/css">
+        <link rel="stylesheet" href="CSS/universal.css" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">             
+        <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
     </head>
     <body>
+        <jsp:include page="navbar.jsp" />
         <center>
-            <header>
-                <a href="productos.jsp">Bienvenido a LINIO MX feiq</a>
-                <a href="carrito.jsp"><img class='view_cart' src="IMG/cart.jpg" width="50" height="50"></a>
-                <a href="ajustes.jsp"><img class='view_cart' src="IMG/user.jpg" width="50" height="50"></a>
-            </header>
-
-            <div>
-                <h1>Ventas Realizadas</h1>
-                <table>
-                    <tr>
-                        <td width='50'><center>noPedido</center></td>
-                        <td width='200'><center>Fecha</center></td>
-                        <td width='150'><center>Comprador</center></td>
-                        <td width='70'><center>&nbsp</center></td>
-                    </tr>
-                    <%
-                        try{
-                            int k = 1;
-                            ResultSet rs = Sentencias.Ventas();
-                            while(rs.next()){
-                                out.print("<tr>");
-                                out.print("<td><center> " + rs.getInt("noPedido") + " </center></td>");
-                                out.print("<td><center> " + rs.getTimestamp("fecha") + " </center></td>");
-                                out.print("<td><center> " + rs.getString("comprador") + " </center></td>");
-                                out.print("<td><center><a href='ServletVentas?accion=mostrar&id="+rs.getInt("noPedido")+"'><button class='add_cart'>Mostrar</button></a></center></td>");
-                                out.print("</tr>");
-                            }
-                        }catch(Exception e){ }
-                    %>
-                </table>
+            <div class="content-wrapper">
+                <div class="container form">   
+                    <h1>Ventas Realizadas</h1><hr><br>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col"><center>#</center></th>
+                                <th scope="col"><center>Fecha</center></th>
+                                <th scope="col"><center>Comprador</center></th>
+                                <th scope="col"><center>Ver</center></th>
+                            </tr>
+                        </thead>
+                        <tbody>                            
+                            <%
+                                try {
+                                    int k = 1;
+                                    ResultSet rs = Sentencias.Ventas();
+                                    while (rs.next()) {
+                                        out.print("<tr>");
+                                        out.print("<th scope='row' ><center> " + rs.getInt("noPedido") + " </center></th>");
+                                        out.print("<td><center> " + rs.getTimestamp("fecha") + " </center></td>");
+                                        out.print("<td><center> " + rs.getString("comprador") + " </center></td>");
+                                        out.print("<td><center><a href='ServletVentas?accion=mostrar&id=" + rs.getInt("noPedido") + "'>"
+                                                + "<button type='button' class='btn btn-dark'>Mostrar</button></a></center></td>");
+                                        out.print("</tr>");
+                                    }
+                                } catch (Exception e) {
+                                }
+                            %>
+                        </tbody>
+                    </table>                    
+                    
+                    
+                </div>
             </div>
-        </center>
+        </center>         
     </body>
 </html>

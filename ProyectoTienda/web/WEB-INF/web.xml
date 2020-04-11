@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
+<<<<<<< HEAD
         <servlet-name>ServletCambiaInfo</servlet-name>
         <servlet-class>Controlador.ServletCambiaInfo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletCambiaInfo</servlet-name>
         <url-pattern>/ServletCambiaInfo</url-pattern>
+=======
+        <servlet-name>ServletBorrarUsu</servlet-name>
+        <servlet-class>Controlador.ServletBorrarUsu</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletBorrarUsu</servlet-name>
+        <url-pattern>/ServletBorrarUsu</url-pattern>
+>>>>>>> master
     </servlet-mapping>
     <session-config>
         <session-timeout>

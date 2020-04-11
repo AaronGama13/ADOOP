@@ -16,17 +16,15 @@
 <%
     //COMPROBAMOS QUE NO EXISTA UNA SESIÓN INICIADA PREVIAMENTE    
     HttpSession sesionOK = request.getSession();   
+    
     String username = null ,priv = null;
     ArrayList<Producto> Carrito = null;
-    String Tarjeta = "";
-    String Validar = "";
+    Double total = 0.0;
     int [][] Cantidad = new int[100][2];
     if(sesionOK.getAttribute("usuario")!=null){
         username = (String) sesionOK.getAttribute("usuario");
         priv = (String) sesionOK.getAttribute("priv");
         Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
-        Tarjeta = (String) sesionOK.getAttribute("Tarjeta");
-        Validar = (String) sesionOK.getAttribute("Validar");
         Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");
     }
     
@@ -34,6 +32,7 @@
         response.sendRedirect("productos.jsp");
         out.print("<script type='text/javascript'>alert('No tienes permiso para entrar al carrito');</script>");
     }
+    
     %>
 
 <!DOCTYPE html>
@@ -44,28 +43,20 @@
         <!--Scripts-->
 	<!--Estilos-->
 	<link rel="stylesheet" type="text/css" href="CSS/carrito.css">
+        <link rel="stylesheet" type="text/css" href="CSS/universal.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
     </head>
     <body>
         <!--Cabecera-->
-	<header id="cabecera">
-		<div id="logo">
-			<h1>UPMIXLOGO</h1>
-		</div>
-		<nav id="menu">
-			<ul>
-				<li><a href="#">Perfil</a></li>
-				<li><a href="#">Catálogo</a></li>
-			</ul>
-		</nav>
-	</header>
+	<jsp:include page="navbar.jsp" />	
 	<div class="clearfix"></div>
 	<section id="global">
 		<div id="carrito">
 			<header id="tu-carrito">
 				<h1>Tu carrito</h1>
 				<div class="carroC">	
-					<img src="IMG/carrito.png">
+					<img src="assets/icons/cart.png">
 				</div>
 				<div class="clearfix"></div>
 			</header>
@@ -87,7 +78,7 @@
                                             continue;
                                         out.print("<div class='articulo'>");    
                                         out.print("<li>");
-                                        out.print("<img src='IMG/img1.jpg'id='imagen'>");
+                                        out.print("<img src='data:image/jpg;base64, " + p.getFoto() + "'id='imagen'>");
                                         out.print("<div id='descripcion'>");
                                         out.print("<p>" + p.getNombre() + "</p>");
                                         out.print("</div>");
@@ -95,19 +86,23 @@
                                         out.print("<p>$" + p.getPrecio() + "</p>");
                                         out.print("</div><br><br>");
                                         out.print("<div id='btn-remover'>");
-                                        out.print("<form method='post' action='ServletCarrito?accion=quitar&id="+ p.getId() +"'>");
+                                        out.print("<form method='get' action='ServletCarrito'>");
+                                        out.print("<input type='hidden' name='accion' value='quitar'>");
+                                        out.print("<input type='hidden' name='id' value='"+ p.getId() +"'>");
                                         out.print("<input type='submit' name='remover' id='remover' value='remover'>");                                        
                                         out.print("</form>");
                                         out.print("</div>");
                                         out.print("</li>");
                                         out.print("<div class='clearfix'></div>");
-                                        out.print("</div><hr>");                                        
+                                        out.print("</div><hr>");
+                                        total = total + (p.getPrecio()*Cantidad[k][1]);
                                         break;
                                         }
                                     }
                                     out.print("</ul>");
                                     k++;
                                 }
+                                sesionOK.setAttribute("total",total);
                             }catch(Exception e){
                                 System.out.println("Error perro " + e);
                             }
@@ -140,14 +135,16 @@
 			</div>
 			<div id="total">
 				<span>Total a pagar</span><br>
-				<span>$40,000</span>
+				<span>$<%out.print(total);%>mxn</span>
 			</div>
 			<div id="pagar">
 				<form>
-					<input type="submit" name="pagar" id="btn-pagar" value="pagar">
+                                        <a href="hacer_compra.jsp" id="btn-pagar">Pagar</a>                                        
+					<!--<input type="submit" name="pagar" id="btn-pagar" value="pagar">-->
+                                        <input type="submit" name="vaciar" id="btn-vaciar" value="Vaciar carrito">
 				</form>
 			</div>
-			<button id="seguir-comprando">Seguir comprando</button>
+                    <button id="seguir-comprando"><a href="productos.jsp">Seguir comprando</a></button>
 		</div>
 		<div class="clearfix"></div>
 	</section>

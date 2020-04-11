@@ -1,0 +1,68 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2/04/2020, 03:50:47 PM
+    Author     : saulg
+*/
+.clearfix{
+    float: none;
+    clear: both;
+}
+#contenedor{
+    margin: 0px auto;
+    width: 70%;
+    margin-top: 20px;
+    padding: 2px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+}
+#contenedor .readonly{
+    border: none;
+    width: 9%;
+}
+.titles {
+    font-size: 15px;
+    font-weight: bold;
+}
+#contenedor #con-header{
+    padding: 5px;
+    width: 100%;
+    text-align: center;    
+    text-transform: uppercase;
+    border-bottom: 1px solid gray;
+}
+#contenedor #con-info{
+    width: 100%;
+    padding: 20px 150px 20px 150px;
+}
+#tel, #cp, #pass, #new-pass, #calle, #col, #alc, #ciudad{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: all 300ms;
+}
+#tel:focus, #cp:focus, #pass:focus,
+#new-pass:focus, #calle:focus, #col:focus,
+#alc:focus, #ciudad:focus{
+    box-shadow: 0px 0px 3px #ff33ec;
+}
+#guardar{
+    width: 30%;
+    padding: 10px 20px 10px 20px;
+    margin: 0px auto;
+    float: right;
+    background-color: #F24452;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 7px;
+    border: none;
+    transition: all 300ms;
+}
+#guardar:active{
+    box-shadow: 0px 0px 4px gray inset;
+    text-shadow: 0px 0px 6px #ccc;    
+}
