@@ -65,3 +65,15 @@ html{
 .dropdown-menu-margin{
     margin: 3em;
 }
+
+.dropdown-menu-margin a{
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    vertical-align: middle;
+}
+
+.dropdown-menu-margin a:hover{
+    text-decoration: none;
+    animation: glow 1s ease-in-out infinite alternate;
+    color: white;
+}
