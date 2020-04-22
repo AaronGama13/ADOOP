@@ -25,6 +25,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Detalles del Producto</title>
         <!--Scripts-->
+        <script type="text/javascript" src="js/validacionNumeros.js"></script>
 	<!--Estilos-->
 	<link rel="stylesheet" type="text/css" href="CSS/carrito.css">
         <link rel="stylesheet" type="text/css" href="CSS/universal.css">
@@ -48,7 +49,7 @@
                     <div class="col-md-6 product-info form-group">                        
                         <%      if(priv.equalsIgnoreCase("A")){%>
                         <div class='product-title'>Modificar Producto</div><hr>
-                                <form action="ServletModProd" method="POST" >
+                        <form action="ServletModProd" method="POST" onsubmit="return validarNum();">
                                         <% out.print("<input name='id' type='hidden' value='"+idProducto+"'>"); %>
                                         <div class="field-wrap">                                            
                                             Cambiar nombre:                                            
@@ -59,14 +60,14 @@
                                             <label>
                                                 Cambiar precio:<span class="req"></span>
                                             </label>
-                                            <% out.print("<input name='precio' class='form-control' type='number' value='"+aux.getPrecio()+"'>"); %>
+                                            <% out.print("<input name='precio' id='precioo' class='form-control' type='number' value='"+aux.getPrecio()+"'>"); %>
                                             <small id="emailHelp" class="form-text text-muted">mxn</small>
                                         </div>
                                         <div class="field-wrap">
                                                 <label>
                                                     Cambiar stock:
                                                 </label>
-                                                <% out.print("<input name='stock' class='form-control' type='number' value='"+aux.getStock()+"'>");%>
+                                                <% out.print("<input name='stock' id='stockk' class='form-control' type='number' value='"+aux.getStock()+"'>");%>
                                                 <small id="emailHelp" class="form-text text-muted">Unidades Disponibles</small>
                                             </div>
                                         <div class="field-wrap">

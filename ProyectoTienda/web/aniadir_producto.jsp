@@ -23,6 +23,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Detalles del Producto</title>
         <!--Scripts-->
+        <script type="text/javascript" src="js/validacionNumeros.js"></script>
 	<!--Estilos-->
 	<link rel="stylesheet" type="text/css" href="CSS/carrito.css">
         <link rel="stylesheet" type="text/css" href="CSS/universal.css">
@@ -41,7 +42,7 @@
                             <% if(priv.equalsIgnoreCase("A")){%>                                                       
 
 
-                                            <form action="ServletAniadir" method="POST" enctype="multipart/form-data">
+                            <form id="formu" action="ServletAniadir" method="POST" onsubmit="return validarNum();" enctype="multipart/form-data">
 
                                                     <div class='product-title text-center'>Agregar Producto</div><hr>
                                                     <div class="field-wrap">                                            
@@ -50,12 +51,12 @@
                                                     </div>                                
                                                     <div class="field-wrap">                                                
                                                         Precio:
-                                                        <input name='precio' class='form-control' type='number' step="0.01">
+                                                        <input name='precio' id="precioo" class='form-control' type='number' step="0.01">
                                                         <small id="moneda" class="form-text text-muted">mxn</small>
                                                     </div>
                                                     <div class="field-wrap">                                                    
                                                         Stock:                                                    
-                                                        <input name='stock' class='form-control' type='number' >
+                                                        <input name='stock' id="stockk" class='form-control' type='number' >
                                                         <small id="unidades" class="form-text text-muted">Unidades Disponibles</small>
                                                     </div>
                                                     <div class="field-wrap">                                                    
