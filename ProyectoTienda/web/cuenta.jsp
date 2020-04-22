@@ -4,6 +4,7 @@
     Author     : saulg
 --%>
 
+<%@page import="Modelos.Usuario"%>
 <%@page import="java.util.Base64"%>
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.sql.Blob"%>
@@ -17,10 +18,11 @@
     //COMPROBAMOS QUE NO EXISTA UNA SESIÓN INICIADA PREVIAMENTE    
     HttpSession sesionOK = request.getSession();   
     String username = "";
-    String priv = "";
-    String msj = "";
-    ArrayList<Producto> Carrito = new ArrayList<Producto>();
-    int[][] Cantidad = new int[100][2];
+    if(sesionOK.getAttribute("usuario")!=null){
+        username = (String) sesionOK.getAttribute("usuario");
+    }else{
+        response.sendRedirect("index.jsp");
+    }
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -39,27 +41,32 @@
             <header id="con-header">
                 <p><h3>Perfil</h3></p>
                 <p>Puedes modificar los datos de tu cuenta</p>
+                <%
+                    Usuario user = Sentencias.obtenerInfoUsuario(username);
+                %>
             </header>
             <div id="con-info">
                 <p><span>Información básica:</span></p>
                 <p>
-                    <input type="text" name="nombre" class="readonly" readonly value='Saúl'>
-                    <input type="text" name="ap" class="readonly" readonly value='García'>
-                    <input type="text" name="am" class="readonly" readonly value='Medina'>
+                    <%
+                        out.print("<input type='text' name='nombre' class='readonly' readonly value='"+user.getNp()+"'>");
+                        out.print("<input type='text' name='ap' class='readonly' readonly value='"+user.getAp()+"'>");
+                        out.print("<input type='text' name='am' class='readonly' readonly value='"+user.getAm()+"'>");
+                    %>
                 </p>
                 <form id="info-basica">                    
                     <span class="titles">Calle</span>
-                    <p><input type="text" name="calle" id="calle" value='Gabriela'></p>
+                    <p><%out.print("<input type='text' name='calle' id='calle' value='"+user.getCalle()+"'>");%></p>
                     <span class="titles">Colonia</span>
-                    <p><input type="text" name="col" id="col" value='Villa Centroamericana'></p>
+                    <p><%out.print("<input type='text' name='col' id='col' value='"+user.getCol()+"'>");%></p>
                     <span class="titles">Alcaldía</span>
-                    <p><input type="text" name="alc" id="alc" value='Tláhuac'></p>
+                    <p><%out.print("<input type='text' name='alc' id='alc' value='"+user.getAlc()+"'>");%></p>
                     <span class="titles">Código Postal</span>
-                    <p><input type="number" name="cp" id="cp" value='13278'></p>
+                    <p><%out.print("<input type='number' name='cp' id='cp' value='"+String.valueOf(user.getCp())+"'>");%></p>
                     <span class="titles">Ciudad</span>
-                    <p><input type="text" name="ciudad" id="ciudad" value='CDMX'></p>
+                    <p><%out.print("<input type='text' name='ciudad' id='ciudad' value='"+user.getCd()+"'>");%></p>
                     <span class="titles">Teléfono</span>
-                    <p><input type="number" name="tel" id="tel" value='5539623586'></p>                      
+                    <p><%out.print("<input type='number' name='tel' id='tel' value='"+user.getTel()+"'>");%></p>                      
                     <p><input type="submit" name="Guardar" id="guardar" value="Guardar"></p>
                     <div class="clearfix"></div><hr>
                 </form>

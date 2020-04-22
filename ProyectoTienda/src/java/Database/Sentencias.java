@@ -7,6 +7,7 @@
 
 package Database;
 import Modelos.Producto;
+import Modelos.Usuario;
 import java.io.InputStream;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 
 public class Sentencias {
     
+    private static final String OBTENER_USUARIO = "SELECT * FROM usuario WHERE username=?";
     private static final String INSERT_USER = "INSERT INTO usuario VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static final String INSERT_COMPRA = "INSERT INTO compra VALUES (?,?,?,?)";
     private static final String INSERT_PRODUCT_COMPRA = "INSERT INTO productocompra values (?,?,?,?)";
@@ -425,5 +427,37 @@ public class Sentencias {
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public static Usuario obtenerInfoUsuario(String username){
+        Usuario aux = null;
+        try{
+            PreparedStatement ps = Conexion.getConexion().prepareStatement(OBTENER_USUARIO);
+            ps.setString(1,username);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                aux = new Usuario(
+                    username,
+                    rs.getString("np"),
+                    rs.getString("ap"),
+                    rs.getString("am"),
+                    rs.getString("calle"),
+                    rs.getString("col"),
+                    rs.getString("alc"),
+                    rs.getString("muni"),
+                    rs.getString("edo"),
+                    rs.getString("cd"),
+                    rs.getString("tel"),
+                    rs.getString("pass"),
+                    rs.getInt("noExt"),
+                    rs.getInt("noInt"),
+                    rs.getInt("cp")
+                );
+            }
+        }catch(Exception e){
+            System.out.println("ERROR (Sentencias.obtenerInfoUsuario): "+e);
+            e.printStackTrace();
+        }
+        return aux;
     }
 }   
