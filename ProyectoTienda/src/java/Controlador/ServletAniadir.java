@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  *
  * @author saulg
@@ -41,6 +42,9 @@ public class ServletAniadir extends HttpServlet {
         response.setContentType("multipart/form-data;");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            
+            
+            
             String params[] = new String[5];
             params[0] = request.getParameter("nom");
             params[1] = request.getParameter("precio");
@@ -50,13 +54,25 @@ public class ServletAniadir extends HttpServlet {
             Part part = request.getPart("foto");
             InputStream foto = part.getInputStream();
             params[4] = request.getParameter("detalles");
+                
+            String patternStr = "</?[a-z][a-z0-9]*[^<>]*>";
+            Pattern pattern = Pattern.compile(patternStr);
             
-            if(Sentencias.insertarProducto(params, foto) == 1) {
-                response.sendRedirect("productos.jsp");
-            } else {
+            Matcher matcher = pattern.matcher(params[0]);
+            boolean invalidNom = matcher.find();
+            matcher.reset(params[4]);
+            boolean invalidDesc = matcher.find();
+            if (invalidNom || invalidDesc){
                 request.setAttribute("msg", "No se pudieron registrar sus datos");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
+                request.getRequestDispatcher("productos.jsp").forward(request, response);
+            }else{
+                if(Sentencias.insertarProducto(params, foto) == 1) {
+                    response.sendRedirect("productos.jsp");
+                } else {
+                    request.setAttribute("msg", "No se pudieron registrar sus datos");
+                    request.getRequestDispatcher("productos.jsp").forward(request, response);
+                }
+            }                                
             
         }
     }
