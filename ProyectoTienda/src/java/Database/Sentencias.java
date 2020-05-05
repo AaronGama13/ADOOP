@@ -264,7 +264,7 @@ public class Sentencias {
             return 10;
         }                
     }
-    public static String insertarCompra(String comprador, int[][] Cantidad,int dcto){
+    public static String insertarCompra(String comprador,ArrayList<Integer> Cantidad,int dcto,ArrayList<Producto> Carrito){
         //SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         String msj;   
@@ -278,7 +278,7 @@ public class Sentencias {
             ps.setString(3, comprador);
             ps.setInt(4,dcto);
             ps.executeUpdate();
-            msj = insertarProductoCompra(NoPedido, Cantidad);
+            msj = insertarProductoCompra(NoPedido,Cantidad,Carrito);
         }catch(Exception e){
             msj = "insertarCompra(error): " + e.toString();
         }
@@ -287,24 +287,20 @@ public class Sentencias {
         
     }
     
-    public static String insertarProductoCompra(int NoPedido, int[][] Cantidad){
+    public static String insertarProductoCompra(int NoPedido,ArrayList<Integer> Cantidad,ArrayList<Producto> Carrito){
         String msj = "Compra realizada con éxito"; 
         try{
-            for(int i = 0; i < 100; i++){
-                if(Cantidad[i][0] == 0)
-                    break;
+            for(Integer i: Cantidad){
                 PreparedStatement ps = Conexion.getConexion().prepareStatement(INSERT_PRODUCT_COMPRA);
                 ps.setInt(1, NoPedido);
-                ps.setInt(2, Cantidad[i][0]);
-                
-                Producto p  = readProductoId(Cantidad[i][0]);
+                ps.setInt(2, Carrito.get(Cantidad.indexOf(i)).getId());
                 /*
                 AQUI CHECAMOS STOCK DE CADA PRODUCTO Y RESTAMOS
                 */
-                ps.setString(3, p.getNombre());
-                ps.setInt(4, Cantidad[i][1]); 
+                ps.setString(3,Carrito.get(Cantidad.indexOf(i)).getNombre());
+                ps.setInt(4,i); 
                 ps.executeUpdate();
-            }   
+            }
         }catch(Exception e){
             msj = "insertarProductoCompra(error): " + e.toString();
         }

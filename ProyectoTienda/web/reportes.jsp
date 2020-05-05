@@ -16,8 +16,6 @@
     String username = "";
     String priv = "";
     String msj = "";
-    ArrayList<Producto> Carrito = new ArrayList<Producto>();
-    int[][] Cantidad = new int[100][2];
     if(sesionOK.getAttribute("usuario") != null){
         //RECUPERAMOS LOS DATOS DE LA SESIÓN
         username = (String) sesionOK.getAttribute("usuario");

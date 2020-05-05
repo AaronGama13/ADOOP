@@ -20,12 +20,12 @@
     String username = null ,priv = null;
     ArrayList<Producto> Carrito = null;
     Double total = 0.0;
-    int [][] Cantidad = new int[100][2];
+    ArrayList <Integer> Cantidad = null;
     if(sesionOK.getAttribute("usuario")!=null){
         username = (String) sesionOK.getAttribute("usuario");
         priv = (String) sesionOK.getAttribute("priv");
         Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
-        Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");
+        Cantidad = (ArrayList<Integer>) sesionOK.getAttribute("Cantidad");
     }
     
     if(priv.equals("A")){
@@ -63,70 +63,35 @@
 			<div id="productos">
                             <%
                             try{
-                                if(Carrito == null)
-                                    Carrito = new ArrayList<Producto>();
-                                if(Cantidad == null)
-                                    Cantidad = new int[100][2];
-                                int k = 0;
-                                for(int i = 0; i < 100; i++) {
-                                    if(Cantidad[k][0] == 0)
-                                    break;
-                                    out.print("<ul id='lista-productos'>");
-                                    for(Producto p: Carrito) {
-                                            if(p.getId() == Cantidad[k][0]){
-                                            if(Cantidad[k][1] <= 0)
-                                            continue;
-                                        out.print("<div class='articulo'>");    
-                                        out.print("<li>");
-                                        out.print("<img src='data:image/jpg;base64, " + p.getFoto() + "'id='imagen'>");
-                                        out.print("<div id='descripcion'>");
-                                        out.print("<p>" + p.getNombre() + "</p>");
-                                        out.print("</div>");
-                                        out.print("<div id='precio'>");
-                                        out.print("<p>$" + p.getPrecio() + "</p>");
-                                        out.print("</div><br><br>");
-                                        out.print("<div id='btn-remover'>");
-                                        out.print("<form method='get' action='ServletCarrito'>");
-                                        out.print("<input type='hidden' name='accion' value='quitar'>");
-                                        out.print("<input type='hidden' name='id' value='"+ p.getId() +"'>");
-                                        out.print("<input type='submit' name='remover' id='remover' value='remover'>");                                        
-                                        out.print("</form>");
-                                        out.print("</div>");
-                                        out.print("</li>");
-                                        out.print("<div class='clearfix'></div>");
-                                        out.print("</div><hr>");
-                                        total = total + (p.getPrecio()*Cantidad[k][1]);
-                                        break;
-                                        }
-                                    }
-                                    out.print("</ul>");
-                                    k++;
+                                out.print("<ul id='lista-productos'>");
+                                for(Producto p: Carrito) {
+                                    out.print("<div class='articulo'>");    
+                                    out.print("<li>");
+                                    out.print("<img src='data:image/jpg;base64, " + p.getFoto() + "'id='imagen'>");
+                                    out.print("<div id='descripcion'>");
+                                    out.print("<p>" + p.getNombre() + "</p>");
+                                    out.print("</div>");
+                                    out.print("<div id='precio'>");
+                                    out.print("<p>$" + p.getPrecio() + "</p>");
+                                    out.print("</div><br><br>");
+                                    out.print("<div id='btn-remover'>");
+                                    out.print("<form method='get' action='ServletCarrito'>");
+                                    out.print("<input type='hidden' name='accion' value='quitar'>");
+                                    out.print("<input type='hidden' name='id' value='"+ p.getId() +"'>");
+                                    out.print("<input type='submit' name='remover' id='remover' value='remover'>");                                        
+                                    out.print("</form>");
+                                    out.print("</div>");
+                                    out.print("</li>");
+                                    out.print("<div class='clearfix'></div>");
+                                    out.print("</div><hr>");
+                                    total = total + (p.getPrecio()*Cantidad.get(Carrito.indexOf(p)));
                                 }
+                                out.print("</ul>");
                                 sesionOK.setAttribute("total",total);
                             }catch(Exception e){
                                 System.out.println("Error perro " + e);
                             }
                             %>
-                            <!--NO BORRAR EL SIGUIENTE BLOQUE DE CÓDIGO QUE ESTÁ COMENTADO-->
-				<!--<ul id="lista-productos">
-					<div class="articulo">
-						<li>							
-							<img src="IMG/img1.jpg" id="imagen">							
-							<div id="descripcion">
-								<p>CD Appetite for Destruction - Guns N' Roses</p>
-							</div>
-							<div id="precio">
-								<p>$10,000</p>
-							</div><br><br>
-							<div id="btn-remover">
-								<form method="post">
-									<input type="submit" name="remover" id="remover" value="remover">
-								</form>
-							</div>
-						</li>		
-						<div class="clearfix"></div>								
-					</div><hr>
-				</ul>-->
 			</div>
 		</div>
 		<div id="subtotal">
@@ -137,12 +102,9 @@
 				<span>Total a pagar</span><br>
 				<span>$<%out.print(total);%>mxn</span>
 			</div>
-			<div id="pagar">
-				<form>
-                                        <a href="hacer_compra.jsp" id="btn-pagar">Pagar</a>                                        
-					<!--<input type="submit" name="pagar" id="btn-pagar" value="pagar">-->
-                                        <input type="submit" name="vaciar" id="btn-vaciar" value="Vaciar carrito">
-				</form>
+			<div id="pagar">				
+                            <a href="hacer_compra.jsp" id="btn-pagar">Pagar</a>                                        
+                            <button id="btn-vaciar"><a href="ServletCarrito?id=0&accion=Vaciar" class="vaciar">Vaciar carrito</a></button>
 			</div>
                     <button id="seguir-comprando"><a href="productos.jsp">Seguir comprando</a></button>
 		</div>

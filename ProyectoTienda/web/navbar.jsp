@@ -20,8 +20,6 @@
     String username = "";
     String priv = "";
     String msj = "";    
-    ArrayList<Producto> Carrito = new ArrayList<Producto>();
-    int[][] Cantidad = new int[100][2];
     %>
 
 <!DOCTYPE html>
@@ -43,9 +41,6 @@
                 username = (String) sesionOK.getAttribute("usuario");
                 priv = (String) sesionOK.getAttribute("priv");
                 if(priv.equalsIgnoreCase("u")){
-                    Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
-                    Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");
-                    msj = (String) sesionOK.getAttribute("msj");
                 
         %>        
                     <nav class="navbar navbar-expand-lg  ">

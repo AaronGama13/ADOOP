@@ -23,8 +23,8 @@
     String priv = "";
     String msj = "";
     Double total = 0.0, descuento = 0.0;    
-    ArrayList<Producto> Carrito = new ArrayList<Producto>();
-    int[][] Cantidad = new int[100][2];
+    ArrayList<Producto> Carrito;
+    ArrayList<Integer> Cantidad;
     int mes = Calendar.getInstance().get(Calendar.MONTH);
     int ano = Calendar.getInstance().get(Calendar.YEAR);
     if(sesionOK.getAttribute("usuario")!=null){
@@ -32,8 +32,7 @@
         priv = (String) sesionOK.getAttribute("priv");
         Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
         Tarjeta = (String) sesionOK.getAttribute("Tarjeta");
-        //Validar = (String) sesionOK.getAttribute("Validar");
-        Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");
+        Cantidad = (ArrayList<Integer>) sesionOK.getAttribute("Cantidad");
         total = (Double) sesionOK.getAttribute("total");
     }
     %>

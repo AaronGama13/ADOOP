@@ -20,13 +20,13 @@
     String username = "";
     String priv = "";
     String msj = "";
-    ArrayList<Producto> Carrito = new ArrayList<Producto>();
-    int[][] Cantidad = new int[100][2];
+    ArrayList<Producto> Carrito;
+    ArrayList<Integer> Cantidad;
     if(sesionOK.getAttribute("usuario")!=null){
         username = (String) sesionOK.getAttribute("usuario");
         priv = (String) sesionOK.getAttribute("priv");
         Carrito = (ArrayList<Producto>) sesionOK.getAttribute("Carrito");
-        Cantidad = (int[][]) sesionOK.getAttribute("Cantidad");
+        Cantidad = (ArrayList<Integer>) sesionOK.getAttribute("Cantidad");
     }else{
         priv = "U";
     }
